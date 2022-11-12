@@ -26,9 +26,9 @@ def seed_workspaces():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_servers():
+def undo_workspaces():
     if os.environ.get("FLASK_ENV") == 'development':
-        db.session.execute('DELETE FROM servers;')
+        db.session.execute('DELETE FROM workspaces;')
     else:
-        db.session.execute('TRUNCATE servers RESTART IDENTITY CASCADE;')
+        db.session.execute('TRUNCATE workspaces RESTART IDENTITY CASCADE;')
     db.session.commit()

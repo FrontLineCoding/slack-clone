@@ -34,9 +34,9 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'first_name': self.first_name
-            'last_name': self.last_name
-            'owned_workspaces': self.owned_workspaces
-            'joined_workspaces': self.workspace_member
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'owned_workspaces': self.owned_workspaces,
+            'joined_workspaces': self.workspace_member,
             'email': self.email
         }

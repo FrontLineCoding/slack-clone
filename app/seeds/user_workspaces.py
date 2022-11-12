@@ -1,4 +1,5 @@
-from app.models import db, user_servers, WorkspaceMember
+from app.models import db
+from app.models.workspace import WorkspaceMember
 import os
 
 def seed_user_workspaces():
@@ -57,9 +58,9 @@ def seed_user_workspaces():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_user_servers():
+def undo_user_workspaces():
     if os.environ.get("FLASK_ENV") == 'development':
-        db.session.execute('DELETE FROM server_members;')
+        db.session.execute('DELETE FROM workspace_members;')
     else:
-        db.session.execute('TRUNCATE server_members RESTART IDENTITY CASCADE;')
+        db.session.execute('TRUNCATE workspace_members RESTART IDENTITY CASCADE;')
     db.session.commit()
