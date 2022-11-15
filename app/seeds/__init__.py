@@ -22,6 +22,11 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_users()
+        undo_workspaces()
+        undo_user_workspaces()
+        undo_channels()
+        undo_messages()
+        undo_comments()
     seed_users()
     seed_workspaces()
     seed_user_workspaces()
