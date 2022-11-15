@@ -1,6 +1,6 @@
 from flask import Blueprint, request
-from app.forms import channel_server_form
-from app.models import Channel, db, server
+# from app.forms import channel_server_form
+from app.models import Channel, db
 from flask_login import current_user, login_required
 from ..forms.channel_workspace_form import ChannelWorkspaceForm
 

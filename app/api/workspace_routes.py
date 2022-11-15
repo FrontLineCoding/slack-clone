@@ -5,7 +5,7 @@ from app.models import Workspace, db, User
 
 
 workspace_routes = Blueprint('workspaces', __name__)
-workspace_routes.register_blueprint(channel_workspace_routes, url_prefix="/")
+# workspace_routes.register_blueprint(channel_workspace_routes, url_prefix="/")
 
 @workspace_routes.route('/me', methods=['GET'])
 def get_my_workspaces():

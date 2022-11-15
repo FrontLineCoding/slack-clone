@@ -1,0 +1,39 @@
+.splash-page-links {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  justify-content: center;
+  width: 50%;
+}
+
+.splash-page-nav-link {
+  font-size: 2.5rem;
+  text-align: center;
+  color: white;
+  padding: 1.5rem 8rem;
+  width: 50%;
+}
+
+.splash-page-nav-link.login {
+  background-color: #c85a00;
+  border-radius: 4rem;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.splash-page-nav-link.login:hover {
+  box-shadow: 5px 5px 5px black;
+  border-radius: 4rem;
+}
+
+.splash-page-nav-link.signup {
+  background-color: black;
+  border-radius: 4rem;
+  color: white;
+  transition: all 0.5s;
+}
+
+.splash-page-nav-link.signup:hover {
+  background-color: #444;
+}
