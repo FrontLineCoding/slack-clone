@@ -43,7 +43,7 @@ const SplashPage = () => {
         </div>
         <div className='contributors'>
           <button className='contributors-btn' onClick={handleContributorsClick}>
-            Contributors
+            Contributor
           </button>
           {/* {showContributors && (
             <div className='contributor-container'>

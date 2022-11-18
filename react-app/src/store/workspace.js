@@ -40,6 +40,7 @@ export const getWorkspaces = () => async (dispatch) => {
 
   if (response.ok) {
     const allWorkspaces = await response.json();
+    // console.log(allWorkspaces);
     dispatch(loadAllWorkspaces(allWorkspaces));
   }
 };
@@ -113,8 +114,9 @@ const initialState = {
 const workspaceReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case LOAD_ALL:
+      console.log('action ap', action);
       const allWorkspacesLoaded = {};
-      action.allWorkspaces.Workspace.forEach((workspace) => {
+      action.allWorkspaces.Workspaces.forEach((workspace) => {
         allWorkspacesLoaded[workspace.id] = workspace;
       });
       state.allWorkspaces = { ...allWorkspacesLoaded };

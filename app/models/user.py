@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     owned_workspaces = db.relationship('Workspace', backref='workspace_owner', cascade="all, delete-orphan")
+    # TODO: flask is mad about workspace_member
     workspace_member = db.relationship('WorkspaceMember', backref="user", cascade="all, delete-orphan")
     messages = db.relationship("Message", back_populates="owner", cascade="all, delete-orphan")
 
@@ -37,6 +38,6 @@ class User(db.Model, UserMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'owned_workspaces': self.owned_workspaces,
-            'joined_workspaces': self.workspace_member,
+            # 'joined_workspaces': self.workspace_member,
             'email': self.email
         }

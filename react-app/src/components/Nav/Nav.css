@@ -1,0 +1,30 @@
+main{
+    height: 100%;
+    width: 8rem;
+    background-color: gray;
+}
+
+.main-nav{
+    display: flex;
+    flex-direction: column;
+}
+
+.list-workspaces{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgb(35, 32, 32);
+    padding: 3px;
+    margin: 3px 0px 0px 3px;
+    box-shadow: 5px 5px 5px;
+}
+.list-workspaces > * {
+    padding: 3px;
+    color: white;
+}
+
+.current-workspace{
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+}
