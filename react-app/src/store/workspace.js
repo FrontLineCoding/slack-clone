@@ -1,4 +1,5 @@
-const LOAD_ALL = "workspaces/LOAD";
+const LOAD_ALL = "workspaces/LOAD_ALL";
+const LOAD_ONE = "workspaces/LOAD_ONE";
 const OWNED = "workspaces/OWNED";
 const JOINED = "workspaces/JOINED";
 const EDIT = "workspaces/EDIT";
@@ -8,6 +9,11 @@ const DELETE = "workspaces/DELETE";
 const loadAllWorkspaces = (allWorkspaces) => ({
   type: LOAD_ALL,
   allWorkspaces,
+});
+
+const loadOneWorkspace = (current) => ({
+  type: LOAD_ONE,
+  current,
 });
 
 const loadOwnedWorkspaces = (ownedWorkspaces) => ({
@@ -64,14 +70,14 @@ export const getWorkspaceById = (id) => async (dispatch) => {
 
   if (response.ok) {
     const workspace = await response.json();
-    dispatch(add(workspace));
+    dispatch(loadOneWorkspace(workspace));
   }
 };
 export const addWorkspace = (workspace) => async (dispatch) => {
   const response = await fetch(`/api/workspaces`, {
     method: "POST",
-    // headers: { "Content-Type": "application/json" },
-    body: workspace,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(workspace),
   });
 
   if (response.ok) {
@@ -84,7 +90,8 @@ export const addWorkspace = (workspace) => async (dispatch) => {
 export const editWorkspace = (workspace, workspaceId) => async (dispatch) => {
   const response = await fetch(`/api/workspaces/${workspaceId}`, {
     method: "PUT",
-    body: workspace,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(workspace),
   });
 
   if (response.ok) {
@@ -108,13 +115,13 @@ export const deleteAWorkspace = (workspaceId) => async (dispatch) => {
 const initialState = {
   owned: {},
   joined: {},
+  current: {},
   allWorkspaces: {},
 };
 
 const workspaceReducer = (state = { ...initialState }, action) => {
   switch (action.type) {
     case LOAD_ALL:
-      console.log('action ap', action);
       const allWorkspacesLoaded = {};
       action.allWorkspaces.Workspaces.forEach((workspace) => {
         allWorkspacesLoaded[workspace.id] = workspace;
@@ -136,13 +143,19 @@ const workspaceReducer = (state = { ...initialState }, action) => {
 
     case JOINED:
       const joinedWorkspaces = {};
-      action.joinedWorkspaces.MyWorkspaces.forEach((workspace) => {
+      action.joinedWorkspaces.JoinedWorkspaces.forEach((workspace) => {
         joinedWorkspaces[workspace.id] = workspace;
       });
       state.joined = { ...joinedWorkspaces };
       return {
         ...state,
       };
+
+    case LOAD_ONE:
+      state.current = action.current
+      return {
+        ...state
+      }
 
     case ADD:
       if (!state[action.workspace.id]) {

@@ -8,7 +8,7 @@ def seed_channels():
     agents_channel_two = Channel( name="Reports", workspace_id=1)
     reds_channel_one = Channel( name="Shotgun", workspace_id=2)
     reds_channel_two = Channel( name="No One Likes Griff", workspace_id=2)
-    blues_channel_one = Channel( name="Choas Crew", workspace_id=3)
+    blues_channel_one = Channel( name="Chaos Crew", workspace_id=3)
     blues_channel_two = Channel( name="No Caboose", workspace_id=3)
     rofl_channel_one = Channel( name="Epic Fails", workspace_id=4)
     rofl_channel_two = Channel( name="Dad Jokes", workspace_id=4)

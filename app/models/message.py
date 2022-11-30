@@ -24,5 +24,5 @@ class Message(db.Model):
             'channel_id': self.channel_id,
             'content': self.content,
             'date_created': self.date_created,
-            'date_modified': self.date_modified
+            'date_modified': self.date_modified,
         }

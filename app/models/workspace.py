@@ -12,7 +12,7 @@ class Workspace(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     img = db.Column(db.String(), nullable=True)
 
-    members = db.relationship('WorkspaceMember', backref='workspace', cascade="all, delete-orphan")
+    members = db.relationship('WorkspaceMember', back_populates='workspace', cascade="all, delete-orphan")
     channels = db.relationship("Channel", back_populates="workspace", cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -21,13 +21,15 @@ class Workspace(db.Model):
             'name': self.name,
             'ownerId': self.owner_id,
             'img': self.img,
-            # 'members': [user.to_dict() for user in self.members],
+            'channels': [channel.to_dict() for channel in self.channels],
+            'members': [user.to_dict() for user in self.members],
         }
     def to_resource_dict(self):
         return {
             'id': self.id,
             'name': self.name,
             'ownerId': self.owner_id,
+            'channels': [channel.to_dict() for channel in self.channels],
         }
 
 class WorkspaceMember(db.Model):
@@ -35,16 +37,13 @@ class WorkspaceMember(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
-    workspace_id = db.Column(db.Integer, db.ForeignKey("workspaces.id"), nullable=True)
+    workspace_id = db.Column(db.Integer, db.ForeignKey("workspaces.id"), nullable=True, default=0)
 
-    # user_of = db.relationship('User', secondary=user_servers, back_ref="workspaces")
-
+    workspace = db.relationship('Workspace', back_populates='members')
+    member = db.relationship('User', back_populates='workspace_member')
 
     def to_dict(self):
         return {
-            'id': self.user.id,
-            'name': self.user.first_name,
-            # 'user_profile_img': self.user.user_profile_img,
-            'workspace_id': self.workspace_id,
-            'workspace': self.workspace.to_resource_dict()
+            'workspace': self.workspace.to_resource_dict(),
+            'members': self.member.to_workspace_dict()
         }

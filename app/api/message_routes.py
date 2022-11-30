@@ -3,11 +3,10 @@ from app.models import Channel, User, Message, db
 from flask_login import current_user, login_required
 from ..forms.message_form import MessageForm
 
-channel_routes = Blueprint('channels', __name__)
 message_routes = Blueprint('messages', __name__)
 
 
-@channel_routes.route('/<int:channelId>/messages', methods=['GET'])
+@message_routes.route('/channels/<int:channelId>', methods=['GET'])
 @login_required
 def get_messages(channelId):
   messages = Message.query.filter(Message.channel_id==channelId)
@@ -15,7 +14,7 @@ def get_messages(channelId):
   return {'messages': [message.to_dict() for message in messages]}
 
 
-@channel_routes.route('/<int:channelId>/messages', methods=['POST'])
+@message_routes.route('/channels/<int:channelId>', methods=['POST'])
 @login_required
 def create_message(channelId):
   form = MessageForm()

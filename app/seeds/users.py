@@ -27,6 +27,7 @@ def seed_users():
 
     db.session.add(demo)
     db.session.add(Tex)
+    db.session.add(Maine)
     db.session.add(Washington)
     db.session.add(Tucker)
     db.session.add(Caboose)
@@ -34,7 +35,6 @@ def seed_users():
     db.session.add(Sarge)
     db.session.add(Griff)
     db.session.add(Simmons)
-    db.session.add(Maine)
 
     db.session.commit()
 

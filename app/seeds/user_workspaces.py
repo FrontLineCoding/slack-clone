@@ -3,29 +3,29 @@ from app.models.workspace import WorkspaceMember
 import os
 
 def seed_user_workspaces():
-    demo = WorkspaceMember(user_id=1, server_id=1)
-    demo2 = WorkspaceMember(user_id=1, server_id=2)
-    demo3 = WorkspaceMember(user_id=1, server_id=3)
-    demo4 = WorkspaceMember(user_id=1, server_id=4)
+    demo = WorkspaceMember(user_id=1, workspace_id=1)
+    demo2 = WorkspaceMember(user_id=1, workspace_id=2)
+    demo3 = WorkspaceMember(user_id=1, workspace_id=3)
+    demo4 = WorkspaceMember(user_id=1, workspace_id=4)
 
-    tex = WorkspaceMember(user_id=2, server_id=1)
-    tex2 = WorkspaceMember(user_id=2, server_id=3)
-    maine = WorkspaceMember(user_id=3, server_id=1)
-    washington = WorkspaceMember(user_id=4, server_id=1)
+    tex = WorkspaceMember(user_id=2, workspace_id=1)
+    tex2 = WorkspaceMember(user_id=2, workspace_id=3)
+    maine = WorkspaceMember(user_id=3, workspace_id=1)
+    washington = WorkspaceMember(user_id=4, workspace_id=1)
 
-    caboose_blue = WorkspaceMember(user_id=6, server_id=3)
-    caboose_rofl = WorkspaceMember(user_id=6, server_id=4)
-    church_blue = WorkspaceMember(user_id=7, server_id=3)
-    church_rofl = WorkspaceMember(user_id=7, server_id=4)
-    tucker_blue = WorkspaceMember(user_id=5, server_id=3)
-    tucker_rofl = WorkspaceMember(user_id=5, server_id=4)
+    caboose_blue = WorkspaceMember(user_id=6, workspace_id=3)
+    caboose_rofl = WorkspaceMember(user_id=6, workspace_id=4)
+    church_blue = WorkspaceMember(user_id=7, workspace_id=3)
+    church_rofl = WorkspaceMember(user_id=7, workspace_id=4)
+    tucker_blue = WorkspaceMember(user_id=5, workspace_id=3)
+    tucker_rofl = WorkspaceMember(user_id=5, workspace_id=4)
 
-    sarge_red = WorkspaceMember(user_id=8, server_id=2)
-    sarge_rofl = WorkspaceMember(user_id=8, server_id=4)
-    griff_red = WorkspaceMember(user_id=9, server_id=2)
-    griff_rofl = WorkspaceMember(user_id=9, server_id=4)
-    simmons_red = WorkspaceMember(user_id=10, server_id=2)
-    simmons_rofl = WorkspaceMember(user_id=10, server_id=4)
+    sarge_red = WorkspaceMember(user_id=8, workspace_id=2)
+    sarge_rofl = WorkspaceMember(user_id=8, workspace_id=4)
+    griff_red = WorkspaceMember(user_id=9, workspace_id=2)
+    griff_rofl = WorkspaceMember(user_id=9, workspace_id=4)
+    simmons_red = WorkspaceMember(user_id=10, workspace_id=2)
+    simmons_rofl = WorkspaceMember(user_id=10, workspace_id=4)
 
 
 

@@ -17,7 +17,8 @@ class User(db.Model, UserMixin):
 
     owned_workspaces = db.relationship('Workspace', backref='workspace_owner', cascade="all, delete-orphan")
     # TODO: flask is mad about workspace_member
-    workspace_member = db.relationship('WorkspaceMember', backref="user", cascade="all, delete-orphan")
+    # workspace_member = db.relationship('WorkspaceMember', backref="user", cascade="all, delete-orphan")
+    workspace_member = db.relationship('WorkspaceMember', back_populates="member", cascade="all, delete-orphan")
     messages = db.relationship("Message", back_populates="owner", cascade="all, delete-orphan")
 
 
@@ -37,7 +38,14 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'owned_workspaces': self.owned_workspaces,
-            # 'joined_workspaces': self.workspace_member,
+            'owned_workspaces': [workspace.to_dict() for workspace in self.owned_workspaces],
+            'joined_workspaces': [workspace.to_dict() for workspace in self.workspace_member],
             'email': self.email
+        }
+
+    def to_workspace_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
         }

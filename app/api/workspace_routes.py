@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user
 from app.models import Workspace, db, User
+from ..forms.workspace_form import WorkspaceForm
 # from .channel_routes import channel_server_routes
 
 
@@ -36,11 +37,14 @@ def create_one_workspace():
     if form.validate_on_submit():
         workspace = Workspace(
             name=form.data["name"],
+            owner_id=current_user.id,
             img=form.data["img"]
         )
         db.session.add(workspace)
         db.session.commit()
         return workspace.to_dict()
+    else:
+        return{"error": "Something went wrong"}
 
 
 @workspace_routes.route('/<int:id>', methods=['GET'])
@@ -61,13 +65,16 @@ def delete_one_workspace(id):
 @workspace_routes.route('/<int:id>', methods=['PUT'])
 def update_one_workspace(id):
     workspace = Workspace.query.get(id)
+    form = WorkspaceForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     if(current_user.id != workspace.owner_id):
         return {"error_code": "403", "message": "This ain't yers"}
     else:
-        form = WorkspaceForm()
-        workspace.name = form.data['name']
-        workspace.img = form.data['img']
+        print(workspace.to_dict())
+        print("****************************", form.data["name"])
+        workspace.name = form.data["name"]
+        workspace.img = form.data["img"]
         db.session.commit()
 
         return {'Message': "updated"}

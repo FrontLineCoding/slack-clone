@@ -1,18 +1,16 @@
 """empty message
 
-Revision ID: 999b9eddf4f1
-Revises:
-Create Date: 2022-11-12 14:23:38.659144
+Revision ID: 6e7f6ac0d2d1
+Revises: 
+Create Date: 2022-11-19 11:45:39.509214
 
 """
 from alembic import op
 import sqlalchemy as sa
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
-revision = '999b9eddf4f1'
+revision = '6e7f6ac0d2d1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -47,9 +45,9 @@ def upgrade():
     op.create_table('workspace_members',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('server_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['server_id'], ['workspaces.id'], ),
+    sa.Column('workspace_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['workspace_id'], ['workspaces.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('messages',
@@ -74,8 +72,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
