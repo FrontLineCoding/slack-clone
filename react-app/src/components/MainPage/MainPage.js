@@ -5,7 +5,7 @@ import "./MainPage.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getJoinedWorkspaces, getOwnedWorkspaces, getWorkspaces } from "../../store/workspace";
-
+import CreateChannel from "../Channels/CreateChannel";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -20,6 +20,9 @@ const MainPage = () => {
     return (
         <div className="main-page">
             <Switch>
+                <Route path='/add-channel'>
+                    <CreateChannel></CreateChannel>
+                </Route>
                 <Route path="/:workspaceId/:channelId">
                     <NavBar></NavBar>
                     <Messages></Messages>

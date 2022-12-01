@@ -19,15 +19,6 @@ const Messages = () => {
         // console.log(users);
     }
 
-    // useEffect(() => {
-
-    //     for(let i = 0; i < userWorkspaces.length; i++){
-    //         console.log('laskujdhf' ,userWorkspaces[i].members.first_name);
-    //         users.push(userWorkspaces[i].members)
-    //         console.log(users);
-    //     }
-    // }, [userWorkspaces])
-
     useEffect(() => {
         dispatch(fetchMessages(channelId))
     }, [dispatch, channelId]);

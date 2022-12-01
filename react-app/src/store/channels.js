@@ -34,7 +34,7 @@ export const getChannels = (workspaceId) => async (dispatch) => {
 };
 
 export const addChannel = (workspaceId, payload) => async (dispatch) => {
-  const response = await fetch(`/api/workspaces/${workspaceId}/channels`, {
+  const response = await fetch(`/api/channels/workspaces/${workspaceId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -67,6 +67,7 @@ export const editChannel =
   };
 
 export const deleteChannelThunk = (channel, workspaceId) => async (dispatch) => {
+  console.log(channel);
   const response = await fetch(
     `/api/channels/${channel.id}/workspaces/${workspaceId}`,
     {

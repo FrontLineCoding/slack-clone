@@ -11,6 +11,8 @@ import cancel from '../../svgFiles/cancel.svg';
 import './Nav.css';
 import CreateWorkspaceForm from './CreateWorkspaceForm';
 import EditWorkspaceForm from './EditWorkspaceForm';
+import CreateChannel from '../Channels/CreateChannel';
+import Channels from '../Channels/Channels';
 
 //TODO: still rending based off all workspaces not joined/owned
 const NavBar = () => {
@@ -33,6 +35,7 @@ const NavBar = () => {
   const [currentWorkspace, setCurrentWorkspace] = useState('');
   const [showWorkspaces, setShowWorkspaces] = useState(false);
   const channels = useSelector(state => state.workspaces.current.channels);
+  const [addChannel, setChannelAdd] = useState(false)
   const isOwned = currentWorkspace?.ownerId === userId;
 
 
@@ -81,6 +84,11 @@ const NavBar = () => {
   },[dispatch])
 
 
+  const handleChannelAdd = () => {
+    setChannelAdd(true);
+  }
+
+
   return (
     <main>
       <nav className='main-nav'>
@@ -118,20 +126,11 @@ const NavBar = () => {
         </div>
         }
         <div>----------</div>
-        <div className='channels-container'>
-          {/* {console.log(channels)} */}
-          {channels?.map((channel) => {
-            return (
-              <NavLink key={`${channel.id}`} to={`/${currentWorkspace.id}/${channel.id}`}>
-                {channel.name}
-              </NavLink>
-            )
-          })}
-        </div>
+        <Channels/>
+
       </nav>
       {showForm && <CreateWorkspaceForm  setShowForm={setShowForm}/>}
       {editForm && <EditWorkspaceForm setEditForm={setEditForm} workspaceId={currentWorkspace.id} workspace={currentWorkspace} setCurrentWorkspace={setCurrentWorkspace}/>}
-
     </main>
   );
 }
