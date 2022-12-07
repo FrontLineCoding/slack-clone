@@ -5,6 +5,8 @@
 
 .show-channels{
     display: flex;
+    color: white;
+    font-size: 20px;
 }
 
 .hide{
@@ -18,4 +20,13 @@
 .single-channel:hover > .hide, .single-channel:hover > a > .hide{
     display: block;
     cursor: pointer;
+}
+
+.single-channel  > a {
+    color: rgb(200, 200, 200);
+    font-size: 15px;
+}
+
+.active{
+    color: white;
 }

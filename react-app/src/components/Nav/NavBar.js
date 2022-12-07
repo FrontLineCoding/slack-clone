@@ -127,7 +127,7 @@ const NavBar = () => {
 
         </div>
         }
-        <div>----------</div>
+        <div className='seperator'>----------</div>
         <Channels setCurrentWorkspace={setCurrentWorkspace}/>
 
       </nav>

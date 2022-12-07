@@ -21,12 +21,15 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.commit()
         undo_users()
         undo_workspaces()
         undo_user_workspaces()
         undo_channels()
         undo_messages()
         undo_comments()
+        db.session.commit()
     seed_users()
     seed_workspaces()
     seed_user_workspaces()

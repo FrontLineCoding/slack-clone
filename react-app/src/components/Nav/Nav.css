@@ -1,7 +1,7 @@
 main{
     height: 100%;
     width: 20vh;
-    background-color: gray;
+    background-color: rgb(32, 32, 32);
 }
 
 .main-nav{
@@ -13,7 +13,7 @@ main{
     display: flex;
     flex-direction: column;
     position: fixed;
-    background-color: rgb(35, 32, 32);
+    background-color: rgb(40, 40, 40);
     padding: 3px;
     margin: 3px 0px 0px 3px;
     box-shadow: 5px 5px 5px;
@@ -33,7 +33,8 @@ main{
     justify-content: space-between;
     padding: 3px;
     font-weight: bolder;
-    font-size: 20px;
+    font-size: 22px;
+    color: white;
 }
 
 .channels-container{
@@ -50,6 +51,10 @@ main{
 
 .channel-add:hover{
   cursor: pointer;
+}
+
+.seperator{
+  color: rgb(200,200,200);
 }
 
 

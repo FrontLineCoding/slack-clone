@@ -50,9 +50,13 @@
     background-color: rgb(30, 30, 30);
 }
 .more-options-menu > ul{
+    display: flex;
+    flex-direction: column;
     list-style: none;
     color: white;
-
+    padding: 10px;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .inner-message{
@@ -77,7 +81,6 @@
 
 .create-messages-div{
     background-color: rgba(52, 52, 52, 0.3);
-    border: solid 1px white;
     height: 7rem;
     width: 100%;
     z-index: 100;
@@ -90,6 +93,7 @@
     z-index: 100;
     color: white;
     padding-left: 10px;
+    border-radius: 10px;
 }
 
 .all-message-list{
@@ -125,7 +129,7 @@
 }
 .message-edit-input{
     background-color: rgba(52, 52, 52, 0.3);
-    border: solid 1px white;
+    border: solid 1px rgb(255, 255, 255);
     height: 7rem;
     width: 100%;
     z-index: 100;
@@ -137,3 +141,26 @@
     background-color: white;
     border-radius: 50%;
 }
+
+
+/* **** SCROLLBAR ************************* SCROLLBAR ********************************* SCROLLBAR ******* */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(30,30,30, 0);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(136,136,136);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
