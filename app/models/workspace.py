@@ -36,8 +36,8 @@ class WorkspaceMember(db.Model):
     __tablename__ = 'workspace_members'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
-    workspace_id = db.Column(db.Integer, db.ForeignKey("workspaces.id"), nullable=True, default=0)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=True)
+    workspace_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("workspaces.id")), nullable=True, default=0)
 
     workspace = db.relationship('Workspace', back_populates='members')
     member = db.relationship('User', back_populates='workspace_member')
