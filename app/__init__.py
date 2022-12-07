@@ -23,7 +23,6 @@ if os.environ.get('FLASK_ENV') == 'production':
     ]
 else:
     origins = "*"
-socketio = SocketIO(cors_allowed_origins=origins, logger=True, engineio_logger=True)
 
 # Setup login manager
 login = LoginManager(app)
