@@ -16,14 +16,6 @@ from .config import Config
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
-if os.environ.get('FLASK_ENV') == 'production':
-    origins = [
-        'https://taut-v2.onrender.com',
-        'http://taut-v2.onrender.com'
-    ]
-else:
-    origins = "*"
-
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
