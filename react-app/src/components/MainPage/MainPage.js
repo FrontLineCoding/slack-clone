@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getJoinedWorkspaces, getOwnedWorkspaces, getWorkspaces } from "../../store/workspace";
 import CreateChannel from "../Channels/CreateChannel";
+import EditChannel from "../Channels/EditChannel";
+import CreateChannelModal from "../Channels/CreateChannelModal";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -21,7 +23,11 @@ const MainPage = () => {
         <div className="main-page">
             <Switch>
                 <Route path='/add-channel'>
-                    <CreateChannel></CreateChannel>
+                    {/* <CreateChannel></CreateChannel> */}
+                    <CreateChannelModal />
+                </Route>
+                <Route path='/edit-channel/:channelId'>
+                    <EditChannel></EditChannel>
                 </Route>
                 <Route path="/:workspaceId/:channelId">
                     <NavBar></NavBar>

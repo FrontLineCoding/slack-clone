@@ -67,7 +67,6 @@ export const editChannel =
   };
 
 export const deleteChannelThunk = (channel, workspaceId) => async (dispatch) => {
-  console.log(channel);
   const response = await fetch(
     `/api/channels/${channel.id}/workspaces/${workspaceId}`,
     {

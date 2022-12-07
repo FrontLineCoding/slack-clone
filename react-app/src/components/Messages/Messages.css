@@ -1,8 +1,7 @@
-.messages-container{
-    display: flex;
-    flex-direction: column;
-    padding-left: 5px;
+.hide{
+    display: none;
 }
+
 .individual-message{
     margin: 3px;
     padding: 10px;
@@ -35,7 +34,31 @@
     display: flex;
     border-bottom: 1px solid black;
     margin-bottom: 3px;
+    justify-content: space-between;
 }
+.single-message:hover > .more-options-div{
+    display: block;
+}
+.more-options-div{
+    padding-top: 5px;
+}
+
+.more-options-menu{
+    box-shadow: 3px 3px 3px black;
+    padding-right: 20px;
+    margin: 5px 15px 10px 0px;
+    background-color: rgb(30, 30, 30);
+}
+.more-options-menu > ul{
+    list-style: none;
+    color: white;
+
+}
+
+.inner-message{
+    display:flex;
+}
+
 .individual-message-info{
     display: flex;
     align-items: center;
@@ -50,4 +73,66 @@
 
 .name{
     color: white;
+}
+
+.create-messages-div{
+    background-color: rgba(52, 52, 52, 0.3);
+    border: solid 1px white;
+    height: 7rem;
+    width: 100%;
+    z-index: 100;
+}
+.create-messages-div > form > input{
+    background-color: rgba(52, 52, 52, 0.3);
+    border: solid 1px white;
+    height: 7rem;
+    width: 100%;
+    z-index: 100;
+    color: white;
+    padding-left: 10px;
+}
+
+.all-message-list{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5px;
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y proximity;
+    scrollbar-width: thin;
+    scrollbar-color: green;
+    scroll-snap-align: end;
+}
+
+.all-message-list > :last-child{
+    scroll-snap-align: end;
+    overflow-anchor: auto;
+}
+
+
+.single-message{
+    margin: 0px 0px 0px 10px;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.edit-message-form{
+    display: flex;
+}
+.message-edit-input{
+    background-color: rgba(52, 52, 52, 0.3);
+    border: solid 1px white;
+    height: 7rem;
+    width: 100%;
+    z-index: 100;
+    color: white;
+    padding-left: 10px;
+}
+.cancel > img {
+    color: white;
+    background-color: white;
+    border-radius: 50%;
 }

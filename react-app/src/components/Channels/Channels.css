@@ -1,0 +1,21 @@
+.channels{
+    display: flex;
+    flex-direction: column;
+}
+
+.show-channels{
+    display: flex;
+}
+
+.hide{
+    display: none;
+}
+
+.single-channel{
+    display: flex;
+    justify-content: space-between;
+}
+.single-channel:hover > .hide, .single-channel:hover > a > .hide{
+    display: block;
+    cursor: pointer;
+}

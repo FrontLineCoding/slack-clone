@@ -56,10 +56,10 @@ main{
 /* ----------- FORM STYLING ---------- */
 /* TODO take care of the buttons with class names */
 .create-workspace-form-container {
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     width: 40rem;
-    padding-left: 50%;
+    /* padding-left: 50%; */
   }
 
   .create-workspace-form {
@@ -88,9 +88,9 @@ main{
     color: #c3c4c5;
     display: flex;
     flex-direction: column;
-    padding: 0 2rem;
+    padding: 0 3rem;
     gap: 1rem;
-    width: 100%;
+    width: 95%;
   }
 
   .create-workspace-photo-container {
@@ -140,7 +140,7 @@ main{
     justify-content: flex-end;
     margin-top: 2rem;
     padding: 1.2rem 2rem 1.2rem;
-    width: 100%;
+    width: 90%;
   }
 
   .create-workspace-form-button-submit {

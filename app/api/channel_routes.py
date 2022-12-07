@@ -40,14 +40,14 @@ def create_a_channel(workspaceId):
 
 
 
-@channel_workspace_routes.route("/:channelId/workspaces/<int:workspaceId>", methods=["GET"])
+@channel_workspace_routes.route("/<int:channelId>/workspaces/<int:workspaceId>", methods=["GET"])
 @login_required
 def get_a_channel(workspaceId, channelId):
   channel = Channel.query.get(channelId)
   return channel.to_dict()
 
 
-@channel_workspace_routes.route("/:channelId/workspaces/<int:workspaceId>", methods=["PUT"])
+@channel_workspace_routes.route("/<int:channelId>/workspaces/<int:workspaceId>", methods=["PUT"])
 @login_required
 def edit_a_channel(workspaceId, channelId):
   if workspace_is_owned_by_user(workspaceId):
@@ -64,10 +64,11 @@ def edit_a_channel(workspaceId, channelId):
     return {"error": "Unauthorized user"}
 
 
-@channel_workspace_routes.route("/:channelId/workspaces/<int:workspaceId>", methods=['DELETE'])
+@channel_workspace_routes.route("/<int:channelId>/workspaces/<int:workspaceId>", methods=['DELETE'])
 @login_required
 def delete_a_channel(channelId, workspaceId):
     channel = Channel.query.get(channelId)
+    print('*******************', channel)
     if workspace_is_owned_by_user(workspaceId):
       db.session.delete(channel)
       db.session.commit()

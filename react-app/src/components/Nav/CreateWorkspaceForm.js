@@ -5,7 +5,7 @@ import { addWorkspace } from "../../store/workspace";
 import "./Nav.css"
 
 
-const CreateWorkspaceForm = ({setShowForm}) => {
+const CreateWorkspaceForm = ({hideForm}) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -56,7 +56,7 @@ const CreateWorkspaceForm = ({setShowForm}) => {
         } else {
             setErrors([]);
             history.push(`/`);
-            setShowForm(false);
+            hideForm();
         }
     })
 
@@ -67,7 +67,7 @@ const CreateWorkspaceForm = ({setShowForm}) => {
 
   const handleCancelClick = (e) => {
     e.preventDefault();
-    setShowForm(false);
+    hideForm();
   };
 
   return (

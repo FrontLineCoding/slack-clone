@@ -13,6 +13,8 @@ import CreateWorkspaceForm from './CreateWorkspaceForm';
 import EditWorkspaceForm from './EditWorkspaceForm';
 import CreateChannel from '../Channels/CreateChannel';
 import Channels from '../Channels/Channels';
+import CreateWorkspaceModal from '../Workspaces/CreateWorkspaceModal';
+import EditWorkspaceModal from '../Workspaces/EditWorkspaceModal';
 
 //TODO: still rending based off all workspaces not joined/owned
 const NavBar = () => {
@@ -126,11 +128,12 @@ const NavBar = () => {
         </div>
         }
         <div>----------</div>
-        <Channels/>
+        <Channels setCurrentWorkspace={setCurrentWorkspace}/>
 
       </nav>
-      {showForm && <CreateWorkspaceForm  setShowForm={setShowForm}/>}
-      {editForm && <EditWorkspaceForm setEditForm={setEditForm} workspaceId={currentWorkspace.id} workspace={currentWorkspace} setCurrentWorkspace={setCurrentWorkspace}/>}
+      {showForm && <CreateWorkspaceModal hideForm={() => setShowForm(false)}/>}
+      {editForm && <EditWorkspaceModal  setEditForm={setEditForm} workspaceId={currentWorkspace.id} workspace={currentWorkspace} setCurrentWorkspace={setCurrentWorkspace}/>}
+      {/* {editForm && <EditWorkspaceForm setEditForm={setEditForm} workspaceId={currentWorkspace.id} workspace={currentWorkspace} setCurrentWorkspace={setCurrentWorkspace}/>} */}
     </main>
   );
 }

@@ -52,13 +52,11 @@ export const fetchMessages = (channelId) => async (dispatch) => {
 };
 
 export const createNewMessage = (message, channelId) => async(dispatch) => {
-
-  const res = await fetch(`/api/channels/${channelId}/messages`, {
+  const res = await fetch(`/api/messages/channels/${channelId}`, {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(message)
   } )
-
   if (res.ok) {
 		const newMessage = await res.json();
 		dispatch(addMessage(newMessage));

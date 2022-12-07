@@ -32,6 +32,7 @@ const EditWorkspaceForm = ({setEditForm, workspaceId ,workspace, setCurrentWorks
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(workspace);
     const payload ={
         name: "",
         owner_id: workspace.ownerId,
