@@ -32,7 +32,7 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
 
 
@@ -46,7 +46,7 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE workspaces SET SCHEMA {SCHEMA};")
 
 
 
@@ -59,7 +59,7 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE channels SET SCHEMA {SCHEMA};")
 
 
 
@@ -74,7 +74,7 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE workspace_members SET SCHEMA {SCHEMA};")
 
 
 
@@ -92,7 +92,7 @@ def upgrade():
     )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE messages SET SCHEMA {SCHEMA};")
 
 
 
@@ -109,7 +109,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
 
     # ### end Alembic commands ###
 
