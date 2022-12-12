@@ -12,6 +12,11 @@ const CreateMessage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (messageContent.replaceAll(" ", "").length == 0) {
+            setErrors(["Channel name cannot be empty"]);
+            return;
+          }
+
         const newMessage = {
             content: messageContent,
         }

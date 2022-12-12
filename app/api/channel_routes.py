@@ -37,6 +37,8 @@ def create_a_channel(workspaceId):
       return channel.to_dict()
     else:
       return {"error": "Unauthorized"}
+  else:
+    return {"error": "Please enter a valid name"}
 
 
 
@@ -68,7 +70,6 @@ def edit_a_channel(workspaceId, channelId):
 @login_required
 def delete_a_channel(channelId, workspaceId):
     channel = Channel.query.get(channelId)
-    print('*******************', channel)
     if workspace_is_owned_by_user(workspaceId):
       db.session.delete(channel)
       db.session.commit()

@@ -20,12 +20,13 @@ main{
 }
 .list-workspaces > * {
     padding: 3px;
-    color: white;
+    color: #ffffff;
 }
 
 .current{
   display: flex;
   justify-content: space-between;
+  color: white;
 }
 
 .current-workspace{
@@ -103,6 +104,7 @@ main{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 5px;
   }
 
   .create-workspace-photo-container.photo {

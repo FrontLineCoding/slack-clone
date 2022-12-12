@@ -15,24 +15,19 @@ import CreateChannel from '../Channels/CreateChannel';
 import Channels from '../Channels/Channels';
 import CreateWorkspaceModal from '../Workspaces/CreateWorkspaceModal';
 import EditWorkspaceModal from '../Workspaces/EditWorkspaceModal';
+import { getChannels } from '../../store/channels';
 
 //TODO: still rending based off all workspaces not joined/owned
 const NavBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const channelsArr = Object.values(channels)
   const userId = useSelector(state => state.session.user.id)
   const workspaces = useSelector(state => state.workspaces);
-  const joinedWorkspaces = Object.values(workspaces.joined);
-  const ownedWorkspaces = Object.values(workspaces.owned);
+  const currentWorkspaceName = useSelector(state => state.workspaces.current.name)
   const [showForm, setShowForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
-  // console.log('joinedWorkspaces', joinedWorkspaces);
-  // console.log('ownedWorkspaces', ownedWorkspaces);
   const workspacesArr = Object.values(workspaces.allWorkspaces);
   const userWorkspaces = useSelector(state => state.workspaces.current.members)
-
-  // const workspacesArr = [...joinedWorkspaces,...ownedWorkspaces]
 
   const [currentWorkspace, setCurrentWorkspace] = useState('');
   const [showWorkspaces, setShowWorkspaces] = useState(false);
@@ -59,25 +54,21 @@ const NavBar = () => {
 
   let users = [];
   for(let i = 0; i < userWorkspaces?.length; i++){
-      // console.log('laskujdhf' ,userWorkspaces[i].members.first_name);
       users.push(userWorkspaces[i].members)
-      // console.log(users);
   }
 
 
 
   useEffect(async () => {
-    if(!currentWorkspace){
+    if(!currentWorkspaceName){
       setCurrentWorkspace(workspacesArr[0])
     }
-    // console.log('*******************',currentWorkspace);
   }, [workspaces]);
 
   useEffect(() => {
-    // console.log('**********************',currentWorkspace)
     if(currentWorkspace){
-      // console.log(currentWorkspace);
       dispatch(getWorkspaceById(currentWorkspace?.id))
+      dispatch(getChannels(currentWorkspace?.id))
     }
   }, [currentWorkspace, editForm])
 
@@ -97,7 +88,7 @@ const NavBar = () => {
         <div className='current' onClick={(e) => {e.preventDefault()}}>
           <div className='current-workspace' onClick={(e)=>{e.preventDefault(); setShowWorkspaces(!showWorkspaces)}}>
             {/* TODO Currently not rerendering unless page reloads */}
-            {currentWorkspace ? currentWorkspace.name:""}
+            {currentWorkspaceName ? currentWorkspaceName : ""}
             <img src={dropDown}></img>
           </div>
             {isOwned && <img src={cancel} onClick={(e) => {handleDelete(e)}}></img>}
@@ -107,7 +98,6 @@ const NavBar = () => {
 
         {showWorkspaces &&
         <div className='list-workspaces'>
-          {/* {console.log('workspacesArr', workspacesArr)} */}
           {showWorkspaces && workspacesArr.map((workspace) => {
             return (
               <NavLink key={workspace.id}  to={`/${workspace.id}`}
@@ -133,7 +123,6 @@ const NavBar = () => {
       </nav>
       {showForm && <CreateWorkspaceModal hideForm={() => setShowForm(false)}/>}
       {editForm && <EditWorkspaceModal  setEditForm={setEditForm} workspaceId={currentWorkspace.id} workspace={currentWorkspace} setCurrentWorkspace={setCurrentWorkspace}/>}
-      {/* {editForm && <EditWorkspaceForm setEditForm={setEditForm} workspaceId={currentWorkspace.id} workspace={currentWorkspace} setCurrentWorkspace={setCurrentWorkspace}/>} */}
     </main>
   );
 }

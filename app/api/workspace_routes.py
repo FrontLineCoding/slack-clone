@@ -71,8 +71,6 @@ def update_one_workspace(id):
     if(current_user.id != workspace.owner_id):
         return {"error_code": "403", "message": "This ain't yers"}
     else:
-        print(workspace.to_dict())
-        print("****************************", form.data["name"])
         workspace.name = form.data["name"]
         workspace.img = form.data["img"]
         db.session.commit()

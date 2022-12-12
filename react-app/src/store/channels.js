@@ -68,7 +68,7 @@ export const editChannel =
 
 export const deleteChannelThunk = (channel, workspaceId) => async (dispatch) => {
   const response = await fetch(
-    `/api/channels/${channel.id}/workspaces/${workspaceId}`,
+    `/api/channels/${channel?.id}/workspaces/${workspaceId}`,
     {
       method: "DELETE",
     }
@@ -86,7 +86,7 @@ const channelReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALL:
       const channels = {};
-      action.channels.forEach((channel) => {
+      action.channels.WorkspaceChannels.forEach((channel) => {
         channels[channel.id] = channel;
       });
       return channels;

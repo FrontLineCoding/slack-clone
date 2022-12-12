@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
+  const history = useHistory();
   const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -15,12 +16,27 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
+    setErrors([]);
+    let errObj = {};
+
+    const validEmail = new RegExp(
+      "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
+    );
+
+    if(!firstName) errObj = {...errObj, "firstname": "Please Provide Your First Name"}
+    if(!lastName) errObj = {...errObj, "lastname": "Please Provide Your Last Name"}
+    if(!validEmail.test(email)) errObj = {...errObj, "email":"Please Provide a Valid email"}
+    if(!password) errObj = {...errObj, "password": "Please Provide a Password"}
+    if(password != repeatPassword) errObj = {...errObj, "repeat": "Passwords must match"}
+
+    if (password === repeatPassword && validEmail && password) {
       const data = await dispatch(signUp(firstName, lastName, email, password));
       if (data) {
         setErrors(data)
       }
     }
+
+    setErrors(Object.values(errObj));
   };
 
   const updateFirstName = (e) => {
@@ -48,7 +64,7 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={onSignUp}>
-      <div>
+      <div className='errors'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
@@ -97,10 +113,10 @@ const SignUpForm = () => {
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
+          // required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button className='button' type='submit'>Sign Up</button>
     </form>
   );
 };

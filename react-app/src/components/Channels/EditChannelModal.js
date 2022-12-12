@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { Modal } from "../../context/Modal";
-import CreateChannel from "./CreateChannel";
+import EditChannel from "./EditChannel";
 
-const CreateChannelModal = ({setShowModal}) => {
+const EditChannelModal = ({setShowEdit}) => {
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   return (
     <div className="server-modal">
         <Modal onClose={() => setShowCreateModal(false)} showCreateModal={showCreateModal}>
-          <CreateChannel
-            onClose={() => setShowCreateModal(false)} setShowModal={setShowModal}
+          <EditChannel
+            onClose={() => setShowCreateModal(false)} setShowEdit={setShowEdit}
           />
         </Modal>
     </div>
   );
 };
 
-export default CreateChannelModal;
+export default EditChannelModal;

@@ -14,6 +14,20 @@ const EditWorkspaceForm = ({setEditForm, workspaceId ,workspace, setCurrentWorks
   const [workspaceImg, setWorkspaceImg] = useState("");
   const [errors, setErrors] = useState([]);
 
+
+  const isValidUrl = (urlString) => {
+    var inputElement = document.createElement("input");
+    inputElement.type = "url";
+    inputElement.value = urlString;
+
+    if (!inputElement.checkValidity()) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+
   useEffect(() => {
     const submitButton = document.querySelector(
       ".create-workspace-form-button-submit"
@@ -32,7 +46,6 @@ const EditWorkspaceForm = ({setEditForm, workspaceId ,workspace, setCurrentWorks
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(workspace);
     const payload ={
         name: "",
         owner_id: workspace.ownerId,
@@ -43,7 +56,27 @@ const EditWorkspaceForm = ({setEditForm, workspaceId ,workspace, setCurrentWorks
     if (workspaceImg) payload.img = workspaceImg;
 
 
-    await dispatch(editWorkspace(payload, workspaceId)).then((res) => {
+    if (workspaceImg) {
+      if(isValidUrl(workspaceImg)){
+        payload.img = workspaceImg;
+        await dispatch(editWorkspace(payload, workspaceId)).then((res) => {
+          if(res?.error) {
+              let errors = [res?.error];
+              setErrors(errors);
+              return;
+          } else {
+              setErrors([]);
+              setEditForm(false);
+              setCurrentWorkspace(workspace)
+              history.push(`/${workspaceId}`);
+          }
+        })
+      }else{
+        setErrors([{"message": "Not a Valid URL"}])
+        return;
+      }
+    }else{
+      await dispatch(editWorkspace(payload, workspaceId)).then((res) => {
         if(res?.error) {
             let errors = [res?.error];
             setErrors(errors);
@@ -54,7 +87,9 @@ const EditWorkspaceForm = ({setEditForm, workspaceId ,workspace, setCurrentWorks
             setCurrentWorkspace(workspace)
             history.push(`/${workspaceId}`);
         }
-    })
+      })
+    }
+
 
   };
 
@@ -68,7 +103,7 @@ const EditWorkspaceForm = ({setEditForm, workspaceId ,workspace, setCurrentWorks
       <div className="create-workspace-form-header">Customize Your Workspace</div>
       <form className="create-workspace-form" onSubmit={handleSubmit}>
         <div className="create-workspace-photo-container">
-            <label>Photo</label>
+            <label></label>
             <input
             type="text"
             placeholder="Photo URL"
@@ -91,7 +126,7 @@ const EditWorkspaceForm = ({setEditForm, workspaceId ,workspace, setCurrentWorks
           {errors.map((error, i) => {
             return (
               <div key={i} className="error">
-                <li>{error}</li>
+                <li>{error.message}</li>
               </div>
             );
           })}

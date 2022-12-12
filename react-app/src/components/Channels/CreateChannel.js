@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addChannel } from "../../store/channels";
-import "./Channels.css"
+import "./ChannelFormStyling.css"
 
 
-const CreateChannel = ({setAddForm}) => {
+const CreateChannel = ({setShowModal}) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -47,15 +47,15 @@ const CreateChannel = ({setAddForm}) => {
         } else {
             setErrors([]);
             history.push(`/${workspaceId}`);
-            // setAddForm(false);
-        }
+            setShowModal(false);
+          }
     })
 
   };
 
   const handleCancelClick = (e) => {
     e.preventDefault();
-    // setAddForm(false);
+    setShowModal(false);
     history.push(`/${workspaceId}`)
   };
 

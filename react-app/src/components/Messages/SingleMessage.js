@@ -18,7 +18,6 @@ const SingleMessage = ({message, users}) => {
     const [messageContent, setMessageContent] = useState(message.content)
 
     const handleMoreOptions = (e, message) => {
-        console.log(message);
         const action = e.target.innerText;
         if(message.user_id != userId){
             setShowMenu(true);
@@ -31,7 +30,6 @@ const SingleMessage = ({message, users}) => {
         }else{
             dispatch(deleteSelectedMessage(message.id));
             setShowMenu(true);
-            console.log(menu);
         }
 
         // choices.className = "more-options-menu hide";

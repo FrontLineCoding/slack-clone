@@ -13,6 +13,19 @@ const CreateWorkspaceForm = ({hideForm}) => {
   const [workspaceImg, setWorkspaceImg] = useState("");
   const [errors, setErrors] = useState([]);
 
+  const isValidUrl = (urlString) => {
+    var inputElement = document.createElement("input");
+    inputElement.type = "url";
+    inputElement.value = urlString;
+
+    if (!inputElement.checkValidity()) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+
 
   useEffect(() => {
     const submitButton = document.querySelector(
@@ -40,25 +53,40 @@ const CreateWorkspaceForm = ({hideForm}) => {
     };
 
     payload.name = name;
-    if (workspaceImg) payload.img = workspaceImg;
+    if (workspaceImg) {
+      if(isValidUrl(workspaceImg)){
+        payload.img = workspaceImg;
+        await dispatch(addWorkspace(payload)).then((res) => {
+          if(res?.error) {
+              let errors = [res?.error];
+              setErrors(errors);
+              return;
+          } else {
+              setErrors([]);
+              history.push(`/`);
+              hideForm();
+          }
+      })
+      }else{
+        setErrors([{"message": "Not a Valid URL"}])
+        return;
+      }
+    }else{
+
+      await dispatch(addWorkspace(payload)).then((res) => {
+          if(res?.error) {
+              let errors = [res?.error];
+              setErrors(errors);
+              return;
+          } else {
+              setErrors([]);
+              history.push(`/`);
+              hideForm();
+          }
+      })
+    }
 
 
-    console.log(payload);
-    // let createdWorkspace = await dispatch(addWorkspace(payload));
-    // if (createdWorkspace) {
-    //   history.push(`/${createdWorkspace.id}`);
-
-    await dispatch(addWorkspace(payload)).then((res) => {
-        if(res?.error) {
-            let errors = [res?.error];
-            setErrors(errors);
-            return;
-        } else {
-            setErrors([]);
-            history.push(`/`);
-            hideForm();
-        }
-    })
 
     //   history.push(`/`);
     //   setShowForm(false);
@@ -75,7 +103,7 @@ const CreateWorkspaceForm = ({hideForm}) => {
       <div className="create-workspace-form-header">Customize Your Workspace</div>
       <form className="create-workspace-form" onSubmit={handleSubmit}>
         <div className="create-workspace-photo-container">
-            <label>Photo</label>
+            <label></label>
             <input
             type="text"
             placeholder="Photo URL"
@@ -98,7 +126,7 @@ const CreateWorkspaceForm = ({hideForm}) => {
           {errors.map((error, i) => {
             return (
               <div key={i} className="error">
-                <li>{error}</li>
+                <li>{error.message}</li>
               </div>
             );
           })}

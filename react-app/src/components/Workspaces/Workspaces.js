@@ -24,8 +24,6 @@ const Workspaces = () => {
     const ownedWorkspaces = Object.values(workspaces.owned);
     const [showForm, setShowForm] = useState(false);
     const [editForm, setEditForm] = useState(false);
-    // console.log('joinedWorkspaces', joinedWorkspaces);
-    // console.log('ownedWorkspaces', ownedWorkspaces);
     const workspacesArr = Object.values(workspaces.allWorkspaces);
     const userWorkspaces = useSelector(state => state.workspaces.current.members)
 

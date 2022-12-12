@@ -12,7 +12,6 @@ const getUsers = (users) => {
 export const fetchUsers = () => async (dispatch) => {
   const res = await fetch(`/api/users/`);
   const data = await res.json();
-  // console.log("FETCHED DATA", data)
   if (res.ok) {
     dispatch(getUsers(data.users));
   } else {
@@ -29,7 +28,6 @@ const usersReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_USERS:
       newState = {...state};
-      // console.log("MESSAGESRED", action.users)
 			action.users.forEach((user) => {
 				// newState[user.id] = [user.username, user.user_profile_img];
         newState[user.id] = user;

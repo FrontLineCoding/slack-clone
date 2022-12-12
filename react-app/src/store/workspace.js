@@ -46,7 +46,6 @@ export const getWorkspaces = () => async (dispatch) => {
 
   if (response.ok) {
     const allWorkspaces = await response.json();
-    // console.log(allWorkspaces);
     dispatch(loadAllWorkspaces(allWorkspaces));
   }
 };

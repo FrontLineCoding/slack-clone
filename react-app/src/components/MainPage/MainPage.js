@@ -8,6 +8,7 @@ import { getJoinedWorkspaces, getOwnedWorkspaces, getWorkspaces } from "../../st
 import CreateChannel from "../Channels/CreateChannel";
 import EditChannel from "../Channels/EditChannel";
 import CreateChannelModal from "../Channels/CreateChannelModal";
+import AuthNav from "../auth/AuthNav";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -20,24 +21,27 @@ const MainPage = () => {
 
 
     return (
-        <div className="main-page">
-            <Switch>
-                <Route path='/add-channel'>
-                    {/* <CreateChannel></CreateChannel> */}
-                    <CreateChannelModal />
-                </Route>
-                <Route path='/edit-channel/:channelId'>
-                    <EditChannel></EditChannel>
-                </Route>
-                <Route path="/:workspaceId/:channelId">
-                    <NavBar></NavBar>
-                    <Messages></Messages>
-                </Route>
-                <Route path="/">
-                    <NavBar></NavBar>
-                </Route>
-            </Switch>
-        </div>
+        <>
+            <AuthNav/>
+            <div className="main-page">
+                <Switch>
+                    <Route path='/add-channel'>
+                        {/* <CreateChannel></CreateChannel> */}
+                        <CreateChannelModal />
+                    </Route>
+                    <Route path='/edit-channel/:channelId'>
+                        <EditChannel></EditChannel>
+                    </Route>
+                    <Route path="/:workspaceId/:channelId">
+                        <NavBar></NavBar>
+                        <Messages></Messages>
+                    </Route>
+                    <Route path="/">
+                        <NavBar></NavBar>
+                    </Route>
+                </Switch>
+            </div>
+        </>
     )
 
 }

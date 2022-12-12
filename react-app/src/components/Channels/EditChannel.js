@@ -5,7 +5,7 @@ import { editChannel } from "../../store/channels";
 import "./Channels.css"
 
 
-const EditChannel = () => {
+const EditChannel = ({setShowEdit}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const {channelId} = useParams();
@@ -47,7 +47,8 @@ const EditChannel = () => {
             return;
         } else {
             setErrors([]);
-            history.push(`/${workspaceId}`);
+            setShowEdit(false);
+            history.push(`/${workspaceId}/${channelId}`);
         }
     })
 
@@ -55,7 +56,7 @@ const EditChannel = () => {
 
   const handleCancelClick = (e) => {
     e.preventDefault();
-    // setAddForm(false);
+    setShowEdit(false);
     history.push('/')
   };
 

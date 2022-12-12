@@ -65,7 +65,6 @@ export const createNewMessage = (message, channelId) => async(dispatch) => {
 }
 
 export const updateMessage = (message) => async (dispatch) => {
-  // console.log("MESSAGEID", messageId, "MESSAGECONTENT", messageContent)
   const res = await fetch(`/api/messages/${message.id}`, {
     method: 'PUT',
     headers: { "Content-Type": "application/json" },
@@ -101,7 +100,6 @@ const messagesReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_MESSAGES:
       // newState = {...state};
-      // console.log("MESSAGESRED", action.messages)
 			action.messages.forEach((message) => {
 				newState[message.id] = message;
 			});

@@ -1,0 +1,59 @@
+form > div> input {
+    margin: 3px;
+    padding: 3px;
+    background-color: rgba(91, 91, 91, 0.3);
+    border-radius: 5px;
+
+}
+form > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    margin-top: 2rem;
+    font-size: 20px;
+    background-color: #c85a00;
+    border-radius: 10px;
+}
+.auth-nav{
+    display: flex;
+    height: 2rem;
+    justify-content: flex-end;
+    background-color: rgb(20,20,20);
+}
+
+.auth-container > form{
+    display: flex;
+    flex-direction: column;
+    margin: 3px;
+}
+
+.email-div > input{
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-bottom: .5rem;
+    padding: 3px;
+    background-color: rgba(91, 91, 91, 0.5);
+    border-radius: 5px;
+}
+
+.password-div > input{
+    margin-left: 5px;
+    padding: 3px;
+    background-color: rgba(91, 91, 91, 0.5);
+    border-radius: 5px;
+}
+
+.login-button{
+    margin-top: 2rem;
+    font-size: 20px;
+    background-color: #c85a00;
+    border-radius: 10px;
+}
+
+.errors{
+    display: flex;
+    flex-direction: column;
+}

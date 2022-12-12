@@ -10,7 +10,6 @@ message_routes = Blueprint('messages', __name__)
 @login_required
 def get_messages(channelId):
   messages = Message.query.filter(Message.channel_id==channelId)
-  print("MESSAGES TEST:", messages)
   return {'messages': [message.to_dict() for message in messages]}
 
 
