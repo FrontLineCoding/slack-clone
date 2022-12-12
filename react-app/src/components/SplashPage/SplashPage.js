@@ -5,7 +5,8 @@ import LoginForm from "../auth/LoginForm";
 import SignUpForm from "../auth/SignUpForm";
 import NavBar from "./NavBar/NavBar";
 import "./SplashPage.css";
-// import Github from "../../svgFiles/github.svg";
+import Github from "../../svgFiles/github.svg";
+import linkedin from '../../svgFiles/linkedin.svg'
 
 const SplashPage = () => {
   const history = useHistory();
@@ -31,9 +32,9 @@ const SplashPage = () => {
             <i className="fa-brands fa-discord"></i>
             <span className="splash-page-header-name">TAUT</span>
           </NavLink>
-          {/* <Link className='repo-link' to={{ pathname: "https://github.com/eulloa10/harmonious-voices" }} target="_blank">
+          <Link className='repo-link' to={{ pathname: "https://github.com/FrontLineCoding/slack-clone" }} target="_blank">
             <img src={Github} alt='github'/>
-          </Link> */}
+          </Link>
         </div>
         <div className="hero-text">
           <div className="hero-text-header">TAUT...</div>
@@ -45,15 +46,15 @@ const SplashPage = () => {
           <button className='contributors-btn' onClick={handleContributorsClick}>
             Contributor
           </button>
-          {/* {showContributors && (
+          {showContributors && (
             <div className='contributor-container'>
-              <Link className='contributor-link' to={{ pathname: "https://github.com/FrontLineCoding" }} target="_blank">
+              <Link className='contributor-link' to={{ pathname: "https://www.linkedin.com/in/andrew-parks-0286ba225/" }} target="_blank">
                 <span className='contributor-name'>Andrew Parks</span>
-                <img className='github-img' src={Github} alt='Andrew Github'/>
+                <img className='github-img' src={linkedin} alt='Andrew Linked In'/>
               </Link>
             </div>
           )
-          } */}
+          }
         </div>
       </div>
       <div className="auth-container">
