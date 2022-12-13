@@ -51,15 +51,24 @@ Taut is a clone of the application Slack. "Slack is an instant messaging program
 -User can edit a Workspace name if proper credentials
 -User can delete a Workspace if proper credentials
 -User can see Workspaces they are a member of
+![Workspace View](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/WorkspaceView.JPG?raw=true)
+![Workspace Edit](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/WorkspaceEdit.JPG?raw=true)
+![Workspace Delete](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/WorkspaceDelete.JPG?raw=true)
+![Workspace Create](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/WorkspaceCreate.JPG?raw=true)
 
 ###Channels
 -User can see channels in a workspace
 -User can create channel in a workspace
 -User can edit a channel's name if proper credentials
 -User can delete a channel if proper credentials
+![Channel Edit](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/ChannelEdit.JPG?raw=true)
+![Channel Add](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/ChannelAdd.JPG?raw=true)
 
 ###ChannelMessages
 -User can see messages in a channel
 -User can create messages in a channel
 -User can edit message in a channel if proper credentials
 -User can delete message in a channel if proper credentials
+![Message Create](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/MessageCreate.JPG?raw=true)
+![Message Edit](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/MessageEdit.JPG?raw=true)
+![Messsage View](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/MessageGet.JPG?raw=true)
