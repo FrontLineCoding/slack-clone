@@ -6,7 +6,7 @@ Taut is a clone of the application Slack. "Slack is an instant messaging program
 [Taut](https://taut-v2.onrender.com/)
 
 ## Technologies Used
- ###Front-End
+ ### Front-End
  -Javascrapit
  -React
  -Redux
@@ -56,9 +56,9 @@ Taut is a clone of the application Slack. "Slack is an instant messaging program
 
 7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
-##Features
+## Features
 
-###Workspaces
+### Workspaces
 -User can create Workspaces
 -User can edit a Workspace name if proper credentials
 -User can delete a Workspace if proper credentials
@@ -68,7 +68,7 @@ Taut is a clone of the application Slack. "Slack is an instant messaging program
 ![Workspace Delete](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/WorkspaceDelete.JPG?raw=true)
 ![Workspace Create](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/WorkspaceCreate.JPG?raw=true)
 
-###Channels
+### Channels
 -User can see channels in a workspace
 -User can create channel in a workspace
 -User can edit a channel's name if proper credentials
@@ -76,7 +76,7 @@ Taut is a clone of the application Slack. "Slack is an instant messaging program
 ![Channel Edit](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/ChannelEdit.JPG?raw=true)
 ![Channel Add](https://github.com/FrontLineCoding/slack-clone/blob/main/taut/ChannelAdd.JPG?raw=true)
 
-###ChannelMessages
+### ChannelMessages
 -User can see messages in a channel
 -User can create messages in a channel
 -User can edit message in a channel if proper credentials
