@@ -19,17 +19,19 @@ const SignUpForm = () => {
     setErrors([]);
     let errObj = {};
 
-    const validEmail = new RegExp(
-      "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-    );
+
+     const validEmail = () => {
+      const re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    };
 
     if(!firstName) errObj = {...errObj, "firstname": "Please Provide Your First Name"}
     if(!lastName) errObj = {...errObj, "lastname": "Please Provide Your Last Name"}
-    if(!validEmail.test(email)) errObj = {...errObj, "email":"Please Provide a Valid email"}
+    if(!validEmail()) errObj = {...errObj, "email":"Please Provide a Valid email"}
     if(!password) errObj = {...errObj, "password": "Please Provide a Password"}
     if(password != repeatPassword) errObj = {...errObj, "repeat": "Passwords must match"}
 
-    if (password === repeatPassword && validEmail && password) {
+    if (password === repeatPassword && validEmail() && password) {
       const data = await dispatch(signUp(firstName, lastName, email, password));
       if (data) {
         setErrors(data)
