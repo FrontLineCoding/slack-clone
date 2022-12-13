@@ -5,6 +5,18 @@ Taut is a clone of the application Slack. "Slack is an instant messaging program
 ## Live Site
 [Taut](https://taut-v2.onrender.com/)
 
+## Technologies Used
+ ###Front-End
+ -Javascrapit
+ -React
+ -Redux
+ 
+### Back-End
+-Python
+-Flask
+-SQLAlchemy
+-PostgreSQL
+
 ## Getting started
 1. Clone this repository (only this branch)
 
