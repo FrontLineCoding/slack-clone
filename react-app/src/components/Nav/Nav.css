@@ -1,196 +1,205 @@
-main{
-    height: 100%;
-    width: 20vh;
-    background-color: rgb(32, 32, 32);
+main {
+  height: 100%;
+  width: 20vh;
+  background-color: rgba(20, 20, 20, 0.75);
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  border-radius: 6px;
+  padding: 3px 5px;
 }
 
-.main-nav{
-    display: flex;
-    flex-direction: column;
+.main-nav {
+  display: flex;
+  flex-direction: column;
 }
 
-.list-workspaces{
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    background-color: rgb(40, 40, 40);
-    padding: 3px;
-    margin: 3px 0px 0px 3px;
-    box-shadow: 5px 5px 5px;
+.list-workspaces {
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background-color: rgb(40, 40, 40);
+  padding: 3px;
+  margin: 3px 0px 0px 3px;
+  box-shadow: 0px 2px 20px;
+  border-radius: 5px;
+  top: 76px;
+  left: 10px;
 }
 .list-workspaces > * {
-    padding: 3px;
-    color: #ffffff;
+  padding: 3px;
+  color: #ffffff;
 }
 
-.current{
+.current {
   display: flex;
   justify-content: space-between;
   color: white;
 }
 
-.current-workspace{
-    display: flex;
-    justify-content: space-between;
-    padding: 3px;
-    font-weight: bolder;
-    font-size: 22px;
-    color: white;
+.current-workspace {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
+  font-weight: bolder;
+  font-size: 22px;
+  color: white;
 }
 
-.channels-container{
-    display: flex;
-    flex-direction: column;
+.channels-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.show-channels{
+.show-channels {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
   font-size: 18px;
 }
 
-.channel-add:hover{
+.channel-add:hover {
   cursor: pointer;
 }
 
-.seperator{
-  color: rgb(200,200,200);
+.seperator {
+  background-color: rgba(200, 200, 200, 0.5);
+  height: 1px;
+  margin-top: 5px;
+  margin-bottom: 3px;
 }
-
 
 /* ----------- FORM STYLING ---------- */
 /* TODO take care of the buttons with class names */
 .create-workspace-form-container {
-    /* display: flex; */
-    /* flex-direction: column; */
-    width: 40rem;
-    /* padding-left: 50%; */
-  }
+  /* display: flex; */
+  /* flex-direction: column; */
+  width: 40rem;
+  /* padding-left: 50%; */
+}
 
-  .create-workspace-form {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
+.create-workspace-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 
-  .workspace-camera {
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.workspace-camera {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  .create-workspace-form-header {
-    display: flex;
-    justify-content: space-between;
-    color: white;
-    padding: 2rem;
-    font-size: 2.4rem;
-  }
+.create-workspace-form-header {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  padding: 2rem;
+  font-size: 2.4rem;
+}
 
-  .create-workspace-input-container {
-    color: #c3c4c5;
-    display: flex;
-    flex-direction: column;
-    padding: 0 3rem;
-    gap: 1rem;
-    width: 95%;
-  }
+.create-workspace-input-container {
+  color: #c3c4c5;
+  display: flex;
+  flex-direction: column;
+  padding: 0 3rem;
+  gap: 1rem;
+  width: 95%;
+}
 
-  .create-workspace-photo-container {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 5px;
-  }
+.create-workspace-photo-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
 
-  .create-workspace-photo-container.photo {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.create-workspace-photo-container.photo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  .create-workspace-photo-container.photo > button {
-    color: #c3c4c5;
-  }
+.create-workspace-photo-container.photo > button {
+  color: #c3c4c5;
+}
 
-  .create-workspace-photo-container.photo > button:hover {
-    color: #ebebec;
-  }
+.create-workspace-photo-container.photo > button:hover {
+  color: #ebebec;
+}
 
-  .create-workspace-input-container label {
-    font-size: 1.2rem;
-  }
+.create-workspace-input-container label {
+  font-size: 1.2rem;
+}
 
-  .create-workspace-input-container input {
-    color: #c3c4c5;
-    background-color: #1b1d1f;
-    border-radius: 0.4rem;
-    height: 3.6rem;
-    padding: 1rem;
-  }
+.create-workspace-input-container input {
+  color: #c3c4c5;
+  background-color: #1b1d1f;
+  border-radius: 0.4rem;
+  height: 3.6rem;
+  padding: 1rem;
+}
 
-  .signup-form-photo {
-    object-fit: cover;
-  }
+.signup-form-photo {
+  object-fit: cover;
+}
 
-  .create-workspace-form-buttons {
-    align-items: center;
-    background-color: #26282b;
-    border-radius: 0 0 1rem 1rem;
-    display: flex;
-    font-size: 1.4rem;
-    gap: 2rem;
-    justify-content: flex-end;
-    margin-top: 2rem;
-    padding: 1.2rem 2rem 1.2rem;
-    width: 100%;
-  }
+.create-workspace-form-buttons {
+  align-items: center;
+  background-color: #26282b;
+  border-radius: 0 0 1rem 1rem;
+  display: flex;
+  font-size: 1.4rem;
+  gap: 2rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding: 1.2rem 2rem 1.2rem;
+  width: 100%;
+}
 
-  .create-workspace-form-button-submit {
-    background-color: rgba(225, 120, 0, .4);
-    border-radius: 0.5rem;
-    color: #ebebec;
-    cursor: not-allowed;
-    padding: 1rem;
-  }
+.create-workspace-form-button-submit {
+  background-color: rgba(225, 120, 0, 0.4);
+  border-radius: 0.5rem;
+  color: #ebebec;
+  cursor: not-allowed;
+  padding: 1rem;
+}
 
-  .create-workspace-form-button-submit.typed {
-    background-color: rgb(225, 120, 0);
-    color: white;
-    cursor: pointer;
-  }
+.create-workspace-form-button-submit.typed {
+  background-color: rgb(225, 120, 0);
+  color: white;
+  cursor: pointer;
+}
 
-  .create-workspace-form-button-edit {
-    background-color: #7289da;
-    border-radius: 0.5rem;
-    color: white;
-    cursor: pointer;
-    padding: 1rem;
-  }
+.create-workspace-form-button-edit {
+  background-color: #7289da;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+}
 
-  .create-workspace-form-button.cancel {
-    color: white;
-    cursor: pointer;
-  }
+.create-workspace-form-button.cancel {
+  color: white;
+  cursor: pointer;
+}
 
-  .signup-error.show-error-message {
-    color: red;
-    visibility: visible;
-  }
+.signup-error.show-error-message {
+  color: red;
+  visibility: visible;
+}
 
-  .signup-error {
-    visibility: hidden;
-    font-size: 1rem;
-  }
+.signup-error {
+  visibility: hidden;
+  font-size: 1rem;
+}
 
-  .workspace-modal{
-    position: absolute;
-    background-color: #1b1d1f;
-    width: 100px;
-    height: 100px;
-    color: white
-  }
+.workspace-modal {
+  position: absolute;
+  background-color: #1b1d1f;
+  width: 100px;
+  height: 100px;
+  color: white;
+}

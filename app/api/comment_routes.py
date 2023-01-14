@@ -7,14 +7,14 @@ message_routes = Blueprint('messages', __name__)
 comment_routes = Blueprint("comments", __name__)
 
 
-@message_routes.route('/<int:messageId>/comments', methods=['GET'])
+@comment_routes.route('/messages/<int:messageId>', methods=['GET'])
 @login_required
 def get_comments(messageId):
   comments = Comment.query.filter(Comment.message_id==messageId)
   return {'comments': [comment.to_dict() for comment in comments]}
 
 
-@message_routes.route('/<int:messageId>/comments', methods=['POST'])
+@comment_routes.route('/messages/<int:messageId>', methods=['POST'])
 @login_required
 def create_comment(messageId):
   form = CommentForm()

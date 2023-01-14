@@ -15,7 +15,7 @@ class Message(db.Model):
 
     owner = db.relationship('User', back_populates="messages")
     channel = db.relationship("Channel", back_populates="messages")
-    comments = db.relationship("Comment", backref="messages", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="message", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -25,4 +25,5 @@ class Message(db.Model):
             'content': self.content,
             'date_created': self.date_created,
             'date_modified': self.date_modified,
+            'comments': [comment.to_dict() for comment in self.comments]
         }

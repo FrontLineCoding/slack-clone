@@ -14,12 +14,13 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    user_profile_img = db.Column(db.String(), nullable=True)
+
 
     owned_workspaces = db.relationship('Workspace', backref='workspace_owner', cascade="all, delete-orphan")
-    # TODO: flask is mad about workspace_member
-    # workspace_member = db.relationship('WorkspaceMember', backref="user", cascade="all, delete-orphan")
     workspace_member = db.relationship('WorkspaceMember', back_populates="member", cascade="all, delete-orphan")
     messages = db.relationship("Message", back_populates="owner", cascade="all, delete-orphan")
+    # comments = db.relationship("Comment", back_populates="owner", cascade="all, delete-orphan")
 
 
     @property
@@ -40,7 +41,8 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'owned_workspaces': [workspace.to_dict() for workspace in self.owned_workspaces],
             'joined_workspaces': [workspace.to_dict() for workspace in self.workspace_member],
-            'email': self.email
+            'email': self.email,
+            'img': self.user_profile_img
         }
 
     def to_workspace_dict(self):
@@ -48,4 +50,5 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'img': self.user_profile_img
         }

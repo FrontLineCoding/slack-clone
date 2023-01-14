@@ -14,11 +14,13 @@ class Comment(db.Model):
     date_modified = db.Column(db.DateTime,  default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
     # owner = db.relationship('User', back_populates="comments")
+    message = db.relationship('Message', back_populates="comments")
 
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            # 'user': self.owner,
             'message_id': self.message_id,
             'content': self.content,
             'date_created': self.date_created,

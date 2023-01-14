@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '../../store/users';
+import './UpdateProfileForm.css';
 
-const SignUpForm = () => {
-  const history = useHistory();
+const UpdateProfileForm = ({ user, hideForm }) => {
+  console.log(user);
   const [errors, setErrors] = useState([]);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState(user?.first_name);
+  const [lastName, setLastName] = useState(user?.last_name);
+  const [email, setEmail] = useState(user?.email);
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [image, setImage] = useState(null);
-  const user = useSelector((state) => state.session.user);
+  const [image, setImage] = useState(user?.img);
+  const [showChangePassword, setShowChangePassword] = useState(false);
+  //   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
-  const onSignUp = async (e) => {
+  const handlesubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
     let errObj = {};
@@ -31,29 +32,42 @@ const SignUpForm = () => {
       errObj = { ...errObj, lastname: 'Please Provide Your Last Name' };
     if (!validEmail())
       errObj = { ...errObj, email: 'Please Provide a Valid email' };
-    if (!password)
+    if (showChangePassword && !password)
       errObj = { ...errObj, password: 'Please Provide a Password' };
-    if (password != repeatPassword)
+    if (showChangePassword && password != repeatPassword)
       errObj = { ...errObj, repeat: 'Passwords must match' };
 
     const userData = new FormData();
     userData.append('first_name', firstName);
     userData.append('last_name', lastName);
     userData.append('email', email);
-    userData.append('password', password);
+    if (password) {
+      userData.append('password', password);
+    }
 
     if (image) {
       userData.append('image', image);
     }
 
     if (password === repeatPassword && validEmail() && password) {
-      const data = await dispatch(signUp(userData));
+      const data = await dispatch(updateUser(userData));
       if (data) {
         setErrors(data);
       }
     }
 
     setErrors(Object.values(errObj));
+    if (errors.length === 0) {
+      const data = await dispatch(updateUser(user.id, userData));
+      if (data) {
+        setErrors(data);
+      }
+      hideForm();
+    }
+  };
+
+  const handleCancel = () => {
+    hideForm();
   };
 
   const updateFirstName = (e) => {
@@ -75,30 +89,27 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
-  if (user) {
-    return <Redirect to="/" />;
-  }
-
   const updateFile = (e) => {
     const file = e.target.files[0];
     if (file) setImage(file);
   };
 
   return (
-    <form onSubmit={onSignUp}>
+    <form className="update-profile-information-form" onSubmit={handlesubmit}>
       <div className="errors">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
       <div className="signup-form-input-container photo">
-        <div className="signup-form-photo-title">PROFILE PHOTO (optional)</div>
+        <div className="signup-form-photo-title">PROFILE PHOTO</div>
         <label htmlFor="file" className="signup-form-input-label photo">
           {!image && <i className="fa-solid fa-camera signup-camera"></i>}
           {image && (
             <img
-              className="signup-form-photo"
-              src={URL.createObjectURL(image)}
+              className="update-form-photo"
+              //   src={URL.createObjectURL(image)}
+              src={image}
               alt="server pic"
             ></img>
           )}
@@ -139,30 +150,48 @@ const SignUpForm = () => {
           value={email}
         ></input>
       </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          // required={true}
-        ></input>
-      </div>
-      <button className="button" type="submit">
-        Sign Up
+      {!showChangePassword && (
+        <div
+          className="change-password"
+          onClick={() => {
+            setShowChangePassword(true);
+          }}
+        >
+          Change Password
+        </div>
+      )}
+      {showChangePassword && (
+        <>
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              onChange={updatePassword}
+              value={password}
+            ></input>
+          </div>
+
+          <div>
+            <label>Repeat Password</label>
+            <input
+              type="password"
+              name="repeat_password"
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              // required={true}
+            ></input>
+          </div>
+        </>
+      )}
+      <button className="button save-changes" type="submit">
+        Save
+      </button>
+      <button className="cancel" onClick={handleCancel}>
+        Cancel
       </button>
     </form>
   );
 };
 
-export default SignUpForm;
+export default UpdateProfileForm;

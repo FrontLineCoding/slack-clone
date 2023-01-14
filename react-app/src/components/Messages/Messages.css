@@ -1,183 +1,226 @@
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
 
-.individual-message{
-    margin: 3px;
-    padding: 10px;
-    color: rgb(200, 200, 200);
+.individual-message {
+  margin: 3px;
+  padding: 10px;
+  color: rgb(200, 200, 200);
 }
 
-.message-component{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(40,40,40);
+.message-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(40, 40, 40);
 }
-.upper-div{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 5px;
-    overflow-y: scroll;
-    overscroll-behavior-y: contain;
-    scroll-snap-type: y proximity;
-    scrollbar-width: thin;
-    scrollbar-color: green;
-    scroll-snap-align: end;
-    height: 40rem
-}
-
-.work-space-users{
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    padding-right: 10px;
-    position: sticky;
+.upper-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 5px;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity;
+  scrollbar-width: thin;
+  scrollbar-color: green;
+  scroll-snap-align: end;
+  height: 40rem;
 }
 
-.user{
-    border: solid 1px rgb(255, 255, 255);
-    color: white;
-    padding: 1px;
-    margin: 1px;
-}
-.message{
-    display: flex;
-    border-bottom: 1px solid black;
-    margin-bottom: 3px;
-    justify-content: space-between;
-}
-.single-message:hover > .more-options-div{
-    display: block;
-}
-.more-options-div{
-    padding-top: 5px;
+.work-space-users {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  position: sticky;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(200, 200, 200, 0.5);
 }
 
-.more-options-menu{
-    box-shadow: 3px 3px 3px black;
-    padding-right: 20px;
-    margin: 5px 15px 10px 0px;
-    background-color: rgb(30, 30, 30);
+.user {
+  border: solid 1px rgb(255, 255, 255);
+  color: white;
+  padding: 1px;
+  margin: 1px;
 }
-.more-options-menu > ul{
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    color: white;
-    padding: 10px;
-    align-items: flex-start;
-    justify-content: center;
+.message {
+  display: flex;
+  border-bottom: 1px solid black;
+  margin-bottom: 3px;
+  justify-content: space-between;
 }
-
-.inner-message{
-    display:flex;
+.single-message:hover > .more-options-div {
+  display: block;
 }
-
-.individual-message-info{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    color: white;
-    background-color: black;
-    border-radius: 50%;
-    margin-top: 5px;
+.more-options-div {
+  padding-top: 5px;
 }
 
-.name{
-    color: white;
+.more-options-menu {
+  box-shadow: 3px 3px 3px black;
+  padding-right: 20px;
+  margin: 5px 15px 10px 0px;
+  background-color: rgb(30, 30, 30);
+}
+.more-options-menu > ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  color: white;
+  padding: 10px;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-.create-messages-div{
-    background-color: rgba(52, 52, 52, 0.3);
-    height: 7rem;
-    width: 100%;
-    z-index: 2;
-}
-.create-messages-div > form > input{
-    background-color: rgba(52, 52, 52, 0.3);
-    border: solid 1px white;
-    height: 7rem;
-    width: 100%;
-    z-index: 100;
-    color: white;
-    padding-left: 10px;
-    border-radius: 10px;
+.inner-message {
+  display: flex;
 }
 
-.all-message-list{
-    display: flex;
-    flex-direction: column;
-    padding-left: 5px;
-    overflow-y: scroll;
-    overscroll-behavior-y: contain;
-    scroll-snap-type: y proximity;
-    scrollbar-width: thin;
-    scrollbar-color: green;
-    scroll-snap-align: end;
+.individual-message-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: white;
+  border-radius: 50%;
+  margin-top: 5px;
 }
 
-.all-message-list > :last-child{
-    scroll-snap-align: end;
-    overflow-anchor: auto;
+.no-picture {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
 }
 
-
-.single-message{
-    margin: 0px 0px 0px 10px;
-    border-bottom: 1px solid black;
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    padding-right: 10px;
+.message-user-pic > img {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.edit-message-form{
-    display: flex;
+.workspace-user-pic > img {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
 }
-.message-edit-input{
-    background-color: rgba(52, 52, 52, 0.3);
-    border: solid 1px rgb(255, 255, 255);
-    height: 7rem;
-    width: 100%;
-    z-index: 100;
-    color: white;
-    padding-left: 10px;
+.workspace-no-picture {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 3px 6px;
+}
+
+.name {
+  color: white;
+}
+
+.create-messages-div {
+  background-color: rgba(52, 52, 52, 0.3);
+  height: 7rem;
+  width: 100%;
+  z-index: 2;
+  margin-bottom: 50px;
+}
+.create-messages-div > form > input {
+  background-color: rgba(52, 52, 52, 0.3);
+  border: solid 1px white;
+  height: 7rem;
+  width: 100%;
+  z-index: 100;
+  color: white;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+section > .create-messages-div > form {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.all-message-list {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity;
+  scrollbar-width: thin;
+  scrollbar-color: green;
+  scroll-snap-align: end;
+}
+
+.all-message-list > :last-child {
+  scroll-snap-align: end;
+  overflow-anchor: auto;
+}
+
+.single-message {
+  margin: 0px 0px 0px 10px;
+  border-bottom: 1px solid black;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.edit-message-form {
+  display: flex;
+  width: 80rem;
+}
+.message-edit-input {
+  background-color: rgba(52, 52, 52, 0.3);
+  border: solid 1px rgb(255, 255, 255);
+  height: 7rem;
+  width: 100%;
+  z-index: 100;
+  color: white;
+  padding-left: 10px;
+  border-radius: 5px;
 }
 .cancel > img {
-    color: white;
-    border-radius: 50%;
+  color: white;
+  border-radius: 50%;
 }
 
-.div-for-flex-end{
-
+.div-for-flex-end {
 }
-
 
 /* **** SCROLLBAR ************************* SCROLLBAR ********************************* SCROLLBAR ******* */
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
-  }
+  width: 10px;
+}
 
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: rgba(30,30,30, 0);
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0);
+}
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(136,136,136);
-    border-radius: 10px;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(136, 136, 136);
+  border-radius: 10px;
+}
 
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { addWorkspace } from "../../store/workspace";
-import "./Nav.css"
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+import { addWorkspace } from '../../store/workspace';
+import './Nav.css';
 
-const CreateWorkspaceForm = ({hideForm}) => {
+const CreateWorkspaceForm = ({ hideForm }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [name, setName] = useState("");
-  const [workspaceImg, setWorkspaceImg] = useState("");
+  const [name, setName] = useState('');
+  const [workspaceImg, setWorkspaceImg] = useState('');
   const [errors, setErrors] = useState([]);
 
   const isValidUrl = (urlString) => {
-    var inputElement = document.createElement("input");
-    inputElement.type = "url";
+    var inputElement = document.createElement('input');
+    inputElement.type = 'url';
     inputElement.value = urlString;
 
     if (!inputElement.checkValidity()) {
@@ -25,72 +25,67 @@ const CreateWorkspaceForm = ({hideForm}) => {
     }
   };
 
-
-
   useEffect(() => {
     const submitButton = document.querySelector(
-      ".create-workspace-form-button-submit"
+      '.create-workspace-form-button-submit'
     );
     if (name) {
-      submitButton.classList.add("typed");
-      submitButton.removeAttribute("disabled");
+      submitButton.classList.add('typed');
+      submitButton.removeAttribute('disabled');
     } else {
-      submitButton.classList.remove("typed");
-      submitButton.setAttribute("disabled", "");
+      submitButton.classList.remove('typed');
+      submitButton.setAttribute('disabled', '');
     }
   }, [name]);
 
   const updateName = (e) => setName(e.target.value);
-  const updatePhoto = (e) => {setWorkspaceImg(e.target.value)}
+  const updatePhoto = (e) => setWorkspaceImg(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload ={
-        name: "",
-        owner_id: 0,
-        img: ""
+    const payload = {
+      name: '',
+      owner_id: 0,
+      img: '',
     };
 
     payload.name = name;
     if (workspaceImg) {
-      if(isValidUrl(workspaceImg)){
+      if (isValidUrl(workspaceImg)) {
         payload.img = workspaceImg;
         await dispatch(addWorkspace(payload)).then((res) => {
-          if(res?.error) {
-              let errors = [res?.error];
-              setErrors(errors);
-              return;
+          if (res?.error) {
+            let errors = [res?.error];
+            setErrors(errors);
+            return;
           } else {
-              setErrors([]);
-              history.push(`/`);
-              hideForm();
+            setErrors([]);
+            //TODO finish this logic to push to created workspace
+            history.push(`/`);
+            hideForm();
           }
-      })
-      }else{
-        setErrors([{"message": "Not a Valid URL"}])
+        });
+      } else {
+        setErrors([{ message: 'Not a Valid URL' }]);
         return;
       }
-    }else{
-
+    } else {
       await dispatch(addWorkspace(payload)).then((res) => {
-          if(res?.error) {
-              let errors = [res?.error];
-              setErrors(errors);
-              return;
-          } else {
-              setErrors([]);
-              history.push(`/`);
-              hideForm();
-          }
-      })
+        if (res?.error) {
+          let errors = [res?.error];
+          setErrors(errors);
+          return;
+        } else {
+          setErrors([]);
+          history.push(`/`);
+          hideForm();
+        }
+      });
     }
-
-
 
     //   history.push(`/`);
     //   setShowForm(false);
-
   };
 
   const handleCancelClick = (e) => {
@@ -100,17 +95,19 @@ const CreateWorkspaceForm = ({hideForm}) => {
 
   return (
     <section className="create-workspace-form-container">
-      <div className="create-workspace-form-header">Customize Your Workspace</div>
+      <div className="create-workspace-form-header">
+        Customize Your Workspace
+      </div>
       <form className="create-workspace-form" onSubmit={handleSubmit}>
         <div className="create-workspace-photo-container">
-            <label></label>
-            <input
+          <label></label>
+          <input
             type="text"
             placeholder="Photo URL"
             value={workspaceImg}
             onChange={updatePhoto}
             className="workspace-modal-name"
-            />
+          />
         </div>
         <div className="create-workspace-input-container">
           <label>WORKSPACE NAME</label>

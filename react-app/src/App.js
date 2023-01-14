@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticate } from './store/session';
-import SplashPage from './components/SplashPage/SplashPage'
+import SplashPage from './components/SplashPage/SplashPage';
 // import NavBar from './components/Nav/NavBar'
 import MainPage from './components/MainPage/MainPage';
 
@@ -11,9 +11,8 @@ function App() {
   const dispatch = useDispatch();
   const cur = useSelector((state) => state.session.user);
 
-
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -28,7 +27,7 @@ function App() {
       <BrowserRouter>
         {loaded && cur ? (
           <Route path="/">
-            <MainPage />
+            <MainPage user={cur} />
           </Route>
         ) : (
           <Route path="/">

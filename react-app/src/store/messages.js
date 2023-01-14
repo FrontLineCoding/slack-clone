@@ -1,46 +1,45 @@
 export const GET_MESSAGES = 'messages/GET_MESSAGES';
 export const ADD_MESSAGE = 'messages/ADD_MESSAGES';
-export const EDIT_MESSAGE= 'messages/EDIT_MESSAGES'
+export const EDIT_MESSAGE = 'messages/EDIT_MESSAGES';
 export const DELETE_MESSAGE = 'messages/DELETE_MESSAGES';
-export const CLEAR_MESSAGES = 'messages/CLEAR_MESSAGES'
-
+export const CLEAR_MESSAGES = 'messages/CLEAR_MESSAGES';
 
 const getMessages = (messages) => {
   return {
     type: GET_MESSAGES,
-    messages
+    messages,
   };
 };
 
 const addMessage = (message) => {
   return {
     type: ADD_MESSAGE,
-    message
-  }
-}
+    message,
+  };
+};
 
 const editMessage = (message) => {
   return {
     type: EDIT_MESSAGE,
-    message
-  }
-}
+    message,
+  };
+};
 
 const deleteMessage = (messageId) => {
   return {
     type: DELETE_MESSAGE,
-    messageId
-  }
-}
+    messageId,
+  };
+};
 
 const clearMessages = () => {
   return {
-    type: CLEAR_MESSAGES
-  }
-}
-
+    type: CLEAR_MESSAGES,
+  };
+};
 
 export const fetchMessages = (channelId) => async (dispatch) => {
+  console.log(channelId);
   const res = await fetch(`/api/messages/channels/${channelId}`);
   const data = await res.json();
   if (res.ok) {
@@ -51,77 +50,77 @@ export const fetchMessages = (channelId) => async (dispatch) => {
   }
 };
 
-export const createNewMessage = (message, channelId) => async(dispatch) => {
+export const createNewMessage = (message, channelId) => async (dispatch) => {
   const res = await fetch(`/api/messages/channels/${channelId}`, {
     method: 'POST',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(message)
-  } )
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message),
+  });
   if (res.ok) {
-		const newMessage = await res.json();
-		dispatch(addMessage(newMessage));
-	}
+    const newMessage = await res.json();
+    dispatch(addMessage(newMessage));
+  }
   return res;
-}
+};
 
 export const updateMessage = (message) => async (dispatch) => {
   const res = await fetch(`/api/messages/${message.id}`, {
     method: 'PUT',
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(message)
-  })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message),
+  });
 
   if (res.ok) {
-		const updatedMessage = await res.json();
-		dispatch(editMessage(updatedMessage));
-	}
+    const updatedMessage = await res.json();
+    dispatch(editMessage(updatedMessage));
+  }
   return res;
-}
+};
 
 export const deleteSelectedMessage = (messageId) => async (dispatch) => {
   const res = await fetch(`/api/messages/${messageId}`, {
     method: 'DELETE',
-  })
+  });
 
   if (res.ok) {
-		dispatch(deleteMessage(messageId));
-	}
+    dispatch(deleteMessage(messageId));
+  }
   return res;
-}
+};
 
 export const clearAllMessages = () => async (dispatch) => {
-		dispatch(clearMessages());
-}
+  dispatch(clearMessages());
+};
 
-const initialState = {}
+const initialState = {};
 
 const messagesReducer = (state = initialState, action) => {
-  let newState = {...initialState}
-	switch (action.type) {
-		case GET_MESSAGES:
+  let newState = { ...initialState };
+  switch (action.type) {
+    case GET_MESSAGES:
       // newState = {...state};
-			action.messages.forEach((message) => {
-				newState[message.id] = message;
-			});
-			return newState;
+      action.messages.forEach((message) => {
+        newState[message.id] = message;
+      });
+      return newState;
     case ADD_MESSAGE:
-      newState = {...state};
-      newState[action.message.id] = action.message
+      newState = { ...state };
+      newState[action.message.id] = action.message;
       return newState;
     case EDIT_MESSAGE:
-      newState = {...state};
+      newState = { ...state };
       newState[action.message.id] = action.message;
       return newState;
     case DELETE_MESSAGE:
-      newState = {...state};
+      newState = { ...state };
       delete newState[action.messageId];
       return newState;
     case CLEAR_MESSAGES:
       newState = {};
       return newState;
-		default:
-			return state;
-	}
+    default:
+      return state;
+  }
 };
 
 export default messagesReducer;

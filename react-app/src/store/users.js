@@ -1,13 +1,11 @@
 export const GET_USERS = 'users/GET_USERS';
 
-
 const getUsers = (users) => {
   return {
     type: GET_USERS,
-    users
+    users,
   };
 };
-
 
 export const fetchUsers = () => async (dispatch) => {
   const res = await fetch(`/api/users/`);
@@ -20,22 +18,28 @@ export const fetchUsers = () => async (dispatch) => {
   }
 };
 
+export const updateUser = (id, userData) => async (dispatch) => {
+  const res = await fetch(`/api/users/${id}`, {
+    method: 'PUT',
+    body: userData,
+  });
+};
 
-const initialState = {}
+const initialState = {};
 
 const usersReducer = (state = initialState, action) => {
-  let newState = {...initialState}
-	switch (action.type) {
-		case GET_USERS:
-      newState = {...state};
-			action.users.forEach((user) => {
-				// newState[user.id] = [user.username, user.user_profile_img];
+  let newState = { ...initialState };
+  switch (action.type) {
+    case GET_USERS:
+      newState = { ...state };
+      action.users.forEach((user) => {
+        // newState[user.id] = [user.username, user.user_profile_img];
         newState[user.id] = user;
-			});
-			return newState;
-		default:
-			return state;
-	}
+      });
+      return newState;
+    default:
+      return state;
+  }
 };
 
 export default usersReducer;

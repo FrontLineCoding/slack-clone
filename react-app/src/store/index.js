@@ -1,8 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import channelReducer from './channels';
+import commentsReducer from './comments';
 import messagesReducer from './messages';
-import session from './session'
+import session from './session';
 import workspaceReducer from './workspace';
 
 const rootReducer = combineReducers({
@@ -10,8 +11,8 @@ const rootReducer = combineReducers({
   workspaces: workspaceReducer,
   channels: channelReducer,
   messages: messagesReducer,
+  comments: commentsReducer,
 });
-
 
 let enhancer;
 
