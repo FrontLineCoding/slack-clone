@@ -91,7 +91,25 @@ const NavBar = ({ joinedWorkspaces }) => {
   };
 
   return (
-    <main>
+    <main className="main-workspace-container">
+      <div className="workspace-nav">
+        {joinedWorkspaces.map((workspace) => {
+          console.log(workspace.workspace);
+          return (
+            <div className="workspace-in-workspace-list">
+              {workspace.workspace.img ? (
+                <img src={workspace.workspace.img}></img>
+              ) : (
+                <div>no photos</div>
+              )}
+            </div>
+          );
+        })}
+        <div className="workspace-in-workspace-list">
+          {' '}
+          <img src={add}></img>
+        </div>
+      </div>
       <nav
         className="main-nav"
         onClick={(e) => {
@@ -99,7 +117,6 @@ const NavBar = ({ joinedWorkspaces }) => {
           if (showWorkspaces) {
             setShowWorkspaces(false);
           }
-          console.log('click');
         }}
       >
         <div

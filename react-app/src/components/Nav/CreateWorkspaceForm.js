@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { addWorkspace } from '../../store/workspace';
@@ -8,9 +8,10 @@ import './Nav.css';
 const CreateWorkspaceForm = ({ hideForm }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.session.user);
 
   const [name, setName] = useState('');
-  const [workspaceImg, setWorkspaceImg] = useState('');
+  const [workspaceImg, setWorkspaceImg] = useState(null);
   const [errors, setErrors] = useState([]);
 
   const isValidUrl = (urlString) => {
@@ -39,53 +40,29 @@ const CreateWorkspaceForm = ({ hideForm }) => {
   }, [name]);
 
   const updateName = (e) => setName(e.target.value);
-  const updatePhoto = (e) => setWorkspaceImg(e.target.value);
+  const updatePhoto = (e) => {
+    const file = e.target.files[0];
+    if (file) setWorkspaceImg(file);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      name: '',
-      owner_id: 0,
-      img: '',
-    };
+    const createdWorkspace = new FormData();
+    createdWorkspace.append('name', name);
+    createdWorkspace.append('owner_id', user.id);
+    if (workspaceImg) createdWorkspace.append('img', workspaceImg);
 
-    payload.name = name;
-    if (workspaceImg) {
-      if (isValidUrl(workspaceImg)) {
-        payload.img = workspaceImg;
-        await dispatch(addWorkspace(payload)).then((res) => {
-          if (res?.error) {
-            let errors = [res?.error];
-            setErrors(errors);
-            return;
-          } else {
-            setErrors([]);
-            //TODO finish this logic to push to created workspace
-            history.push(`/`);
-            hideForm();
-          }
-        });
-      } else {
-        setErrors([{ message: 'Not a Valid URL' }]);
-        return;
+    if (name) {
+      const data = await dispatch(addWorkspace(createdWorkspace));
+      hideForm();
+      if (data) {
+        setErrors(data);
+        console.log('----------------------', data);
       }
     } else {
-      await dispatch(addWorkspace(payload)).then((res) => {
-        if (res?.error) {
-          let errors = [res?.error];
-          setErrors(errors);
-          return;
-        } else {
-          setErrors([]);
-          history.push(`/`);
-          hideForm();
-        }
-      });
+      setErrors(["Name isn't valid"]);
     }
-
-    //   history.push(`/`);
-    //   setShowForm(false);
   };
 
   const handleCancelClick = (e) => {
@@ -100,12 +77,20 @@ const CreateWorkspaceForm = ({ hideForm }) => {
       </div>
       <form className="create-workspace-form" onSubmit={handleSubmit}>
         <div className="create-workspace-photo-container">
-          <label></label>
+          <label>
+            {workspaceImg && (
+              <img
+                src={URL.createObjectURL(workspaceImg)}
+                className="workspace-form-image"
+                alt="workspace pic"
+              ></img>
+            )}
+          </label>
           <input
-            type="text"
-            placeholder="Photo URL"
-            value={workspaceImg}
+            type="file"
+            id="file"
             onChange={updatePhoto}
+            accept="/image/*"
             className="workspace-modal-name"
           />
         </div>
@@ -120,6 +105,7 @@ const CreateWorkspaceForm = ({ hideForm }) => {
           />
         </div>
         <ul className="errors">
+          {/*}
           {errors.map((error, i) => {
             return (
               <div key={i} className="error">
@@ -127,6 +113,7 @@ const CreateWorkspaceForm = ({ hideForm }) => {
               </div>
             );
           })}
+        */}
         </ul>
         <div className="create-workspace-form-buttons">
           <button

@@ -99,7 +99,7 @@ const SignUpForm = () => {
             <img
               className="signup-form-photo"
               src={URL.createObjectURL(image)}
-              alt="server pic"
+              alt="user pic"
             ></img>
           )}
         </label>

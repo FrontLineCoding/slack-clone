@@ -1,15 +1,32 @@
 main {
   height: 100%;
-  width: 20vh;
+  /* width: 140px; */
   background-color: rgba(20, 20, 20, 0.75);
   border: 1px solid rgba(200, 200, 200, 0.5);
   border-radius: 6px;
   padding: 3px 5px;
+  display: flex;
 }
 
 .main-nav {
   display: flex;
   flex-direction: column;
+  width: 140px;
+  padding-left: 5px;
+}
+.workspace-nav {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(200, 200, 200, 0.5);
+}
+.workspace-in-workspace-list > img {
+  height: 30px;
+  width: 30px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  margin: 5px;
+  color: white;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .list-workspaces {
@@ -202,4 +219,9 @@ main {
   width: 100px;
   height: 100px;
   color: white;
+}
+
+.workspace-form-image {
+  height: 30px;
+  width: 30px;
 }

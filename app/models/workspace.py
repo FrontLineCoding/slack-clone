@@ -29,6 +29,7 @@ class Workspace(db.Model):
             'id': self.id,
             'name': self.name,
             'ownerId': self.owner_id,
+            'img': self.img,
             'channels': [channel.to_dict() for channel in self.channels],
         }
 

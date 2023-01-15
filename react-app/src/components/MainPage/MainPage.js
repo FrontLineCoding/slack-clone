@@ -19,6 +19,11 @@ const MainPage = ({ user }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { workspaceId, channelId } = useParams();
+  const joinedWorkspaces = [
+    ...user.owned_workspaces,
+    ...user.joined_workspaces,
+  ];
+  console.log(...user.owned_workspaces);
   useEffect(() => {
     if (!workspaceId) {
       history.push(

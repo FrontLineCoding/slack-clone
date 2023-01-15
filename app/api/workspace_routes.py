@@ -2,7 +2,8 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import current_user
 from app.models import Workspace, db, User
 from ..forms.workspace_form import WorkspaceForm
-# from .channel_routes import channel_server_routes
+from app.aws import (
+    upload_file_to_s3, allowed_file, get_unique_filename)
 
 
 workspace_routes = Blueprint('workspaces', __name__)
@@ -35,16 +36,30 @@ def create_one_workspace():
     form = WorkspaceForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        url = None
+        print(request.files)
+
+        if "img" in request.files:
+            img = request.files['img']
+            if not allowed_file(img.filename):
+                return {"errors": "file type not permitted"}
+            img.filename = get_unique_filename(img.filename)
+            upload = upload_file_to_s3(img)
+
+            if "url" not in upload:
+                return upload, 400
+            url = upload["url"]
+
         workspace = Workspace(
             name=form.data["name"],
             owner_id=current_user.id,
-            img=form.data["img"]
+            img=url
         )
         db.session.add(workspace)
         db.session.commit()
         return workspace.to_dict()
     else:
-        return{"error": "Something went wrong"}
+        return{"error": "Could not create workspace"}
 
 
 @workspace_routes.route('/<int:id>', methods=['GET'])

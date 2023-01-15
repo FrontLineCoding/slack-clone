@@ -1,10 +1,10 @@
-const LOAD_ALL = "workspaces/LOAD_ALL";
-const LOAD_ONE = "workspaces/LOAD_ONE";
-const OWNED = "workspaces/OWNED";
-const JOINED = "workspaces/JOINED";
-const EDIT = "workspaces/EDIT";
-const ADD = "workspaces/ADD";
-const DELETE = "workspaces/DELETE";
+const LOAD_ALL = 'workspaces/LOAD_ALL';
+const LOAD_ONE = 'workspaces/LOAD_ONE';
+const OWNED = 'workspaces/OWNED';
+const JOINED = 'workspaces/JOINED';
+const EDIT = 'workspaces/EDIT';
+const ADD = 'workspaces/ADD';
+const DELETE = 'workspaces/DELETE';
 
 const loadAllWorkspaces = (allWorkspaces) => ({
   type: LOAD_ALL,
@@ -50,14 +50,14 @@ export const getWorkspaces = () => async (dispatch) => {
   }
 };
 export const getJoinedWorkspaces = () => async (dispatch) => {
-  const promise = await fetch("/api/workspaces/me");
+  const promise = await fetch('/api/workspaces/me');
   if (promise.ok) {
     const joinedWorkspaces = await promise.json();
     dispatch(loadJoinedWorkspaces(joinedWorkspaces));
   }
 };
 export const getOwnedWorkspaces = () => async (dispatch) => {
-  const promise = await fetch("/api/workspaces/owned");
+  const promise = await fetch('/api/workspaces/owned');
   if (promise.ok) {
     const joinedWorkspaces = await promise.json();
     dispatch(loadOwnedWorkspaces(joinedWorkspaces));
@@ -74,9 +74,8 @@ export const getWorkspaceById = (id) => async (dispatch) => {
 };
 export const addWorkspace = (workspace) => async (dispatch) => {
   const response = await fetch(`/api/workspaces`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(workspace),
+    method: 'POST',
+    body: workspace,
   });
 
   if (response.ok) {
@@ -88,8 +87,8 @@ export const addWorkspace = (workspace) => async (dispatch) => {
 
 export const editWorkspace = (workspace, workspaceId) => async (dispatch) => {
   const response = await fetch(`/api/workspaces/${workspaceId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(workspace),
   });
 
@@ -102,7 +101,7 @@ export const editWorkspace = (workspace, workspaceId) => async (dispatch) => {
 
 export const deleteAWorkspace = (workspaceId) => async (dispatch) => {
   const response = await fetch(`/api/workspaces/${workspaceId}`, {
-    method: "DELETE",
+    method: 'DELETE',
   });
   if (response.ok) {
     const returnValue = response.json();
@@ -151,10 +150,10 @@ const workspaceReducer = (state = { ...initialState }, action) => {
       };
 
     case LOAD_ONE:
-      state.current = action.current
+      state.current = action.current;
       return {
-        ...state
-      }
+        ...state,
+      };
 
     case ADD:
       if (!state[action.workspace.id]) {

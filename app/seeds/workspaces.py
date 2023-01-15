@@ -4,13 +4,13 @@ import os
 # Adds a demo user, you can add other users here if you want
 def seed_workspaces():
     agents = Workspace(
-        name="Agents", owner_id=2)
+        name="Agents", owner_id=2, img='https://taut.s3.us-east-2.amazonaws.com/Seed+Workspace+photos/agentsWorkspace.JPG')
     red = Workspace(
-        name="Reds ", owner_id=8)
+        name="Reds ", owner_id=8, img='https://taut.s3.us-east-2.amazonaws.com/Seed+Workspace+photos/redSquare.JPG')
     blue = Workspace(
-        name="Blues", owner_id=7)
+        name="Blues", owner_id=7, img='https://taut.s3.us-east-2.amazonaws.com/Seed+Workspace+photos/blueSquare.JPG')
     rofl = Workspace(
-        name="ROFL COPTER", owner_id=9)
+        name="ROFL COPTER", owner_id=9, img='https://taut.s3.us-east-2.amazonaws.com/Seed+Workspace+photos/rofl-copter.JPG')
 
 
     db.session.add(agents)
