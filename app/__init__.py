@@ -11,6 +11,7 @@ from .api.workspace_routes import workspace_routes
 from .api.channel_routes import channel_workspace_routes
 from .api.message_routes import message_routes
 from .api.comment_routes import comment_routes
+from .api.workspacemember_routes import workspacemember_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -36,6 +37,7 @@ app.register_blueprint(workspace_routes, url_prefix='/api/workspaces')
 app.register_blueprint(channel_workspace_routes, url_prefix='/api/channels')
 app.register_blueprint(message_routes, url_prefix='/api/messages')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
+app.register_blueprint(workspacemember_routes, url_prefix='/api/workspacemembers')
 # app.register_blueprint(session_routes, url_prefix='/api/me')
 
 

@@ -19,11 +19,6 @@ const MainPage = ({ user }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { workspaceId, channelId } = useParams();
-  const joinedWorkspaces = [
-    ...user.owned_workspaces,
-    ...user.joined_workspaces,
-  ];
-  console.log(...user.owned_workspaces);
   useEffect(() => {
     if (!workspaceId) {
       history.push(
@@ -50,16 +45,27 @@ const MainPage = ({ user }) => {
             <EditChannel></EditChannel>
           </Route>
           <Route path="/:workspaceId/:channelId/:messageId">
-            <NavBar joinedWorkspaces={user.joined_workspaces}></NavBar>
+            <NavBar
+              joinedWorkspaces={user.joined_workspaces}
+              ownedWorkspaces={user.owned_workspaces}
+            ></NavBar>
             <Messages></Messages>
             <Comments></Comments>
           </Route>
           <Route path="/:workspaceId/:channelId">
-            <NavBar joinedWorkspaces={user.joined_workspaces}></NavBar>
+            <NavBar
+              joinedWorkspaces={user.joined_workspaces}
+              ownedWorkspaces={user.owned_workspaces}
+            >
+              {' '}
+            </NavBar>
             <Messages></Messages>
           </Route>
           <Route path="/">
-            <NavBar joinedWorkspaces={user.joined_workspaces}></NavBar>
+            <NavBar
+              joinedWorkspaces={user.joined_workspaces}
+              ownedWorkspaces={user.owned_workspaces}
+            ></NavBar>
           </Route>
         </Switch>
       </div>

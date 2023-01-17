@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { addUserToWorkspace } from '../../store/users';
 
 import { addWorkspace } from '../../store/workspace';
 import './Nav.css';
 
-const CreateWorkspaceForm = ({ hideForm }) => {
+const CreateWorkspaceForm = ({ hideForm, setChannelAdd }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -54,11 +55,17 @@ const CreateWorkspaceForm = ({ hideForm }) => {
     if (workspaceImg) createdWorkspace.append('img', workspaceImg);
 
     if (name) {
-      const data = await dispatch(addWorkspace(createdWorkspace));
+      const data = await dispatch(addWorkspace(createdWorkspace)).then(
+        (res) => {
+          setChannelAdd(true);
+          console.log(res);
+          dispatch(addUserToWorkspace(user.id, res?.id));
+        }
+      );
       hideForm();
+
       if (data) {
         setErrors(data);
-        console.log('----------------------', data);
       }
     } else {
       setErrors(["Name isn't valid"]);

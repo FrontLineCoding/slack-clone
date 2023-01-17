@@ -18,6 +18,10 @@ main {
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(200, 200, 200, 0.5);
+  width: 45px;
+}
+.workspace-in-workspace-list {
+  color: white;
 }
 .workspace-in-workspace-list > img {
   height: 30px;
@@ -27,6 +31,17 @@ main {
   color: white;
   border-radius: 5px;
   margin-right: 10px;
+  transition: all 1s;
+}
+.workspace-in-workspace-list > img:hover {
+  /* position: sticky; */
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+
+.add-workspace:hover > img {
+  background-color: rgba(225, 120, 0, 0.5);
 }
 
 .list-workspaces {

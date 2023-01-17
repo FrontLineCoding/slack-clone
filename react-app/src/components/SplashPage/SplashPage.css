@@ -24,6 +24,9 @@
 .splash-page-header-name {
   font-weight: 900;
 }
+.hero-text-header:hover {
+  cursor: pointer;
+}
 
 .splash-page-content {
   display: flex;
@@ -83,13 +86,13 @@
   padding-right: 10px;
 }
 
-.auth-container{
+.auth-container {
   margin-top: 10px;
   width: auto;
   display: flex;
   justify-content: center;
 }
-.splash-page-links{
+.splash-page-links {
   display: flex;
   flex-direction: row;
 }

@@ -1,4 +1,5 @@
 export const GET_USERS = 'users/GET_USERS';
+export const ADD_USER_WORKSPACE = 'users/ADD_USER_WORKSPACE';
 
 const getUsers = (users) => {
   return {
@@ -22,6 +23,14 @@ export const updateUser = (id, userData) => async (dispatch) => {
   const res = await fetch(`/api/users/${id}`, {
     method: 'PUT',
     body: userData,
+  });
+};
+
+export const addUserToWorkspace = (userId, workspaceId) => async (dispatch) => {
+  const res = await fetch(`/api/workspacemembers/${userId}/${workspaceId}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, workspaceId }),
   });
 };
 

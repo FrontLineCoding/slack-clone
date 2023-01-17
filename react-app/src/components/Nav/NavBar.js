@@ -23,21 +23,18 @@ import CreateWorkspaceModal from '../Workspaces/CreateWorkspaceModal';
 import EditWorkspaceModal from '../Workspaces/EditWorkspaceModal';
 import { getChannels } from '../../store/channels';
 
-//TODO: still rending based off all workspaces not joined/owned
 const NavBar = ({ joinedWorkspaces }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userId = useSelector((state) => state.session.user.id);
   const workspaces = useSelector((state) => state.workspaces);
-  // const joinedWorkspaces = useSelector(
-  //   (state) => state.session.user.joined_workspaces
-  // );
   const currentWorkspaceName = useSelector(
     (state) => state.workspaces.current.name
   );
+  const ownedWorkspacesState = useSelector((state) => state.workspaces.owned);
+  const ownedWorkspaces = Object.values(ownedWorkspacesState);
   const [showForm, setShowForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
-  const workspacesArr = Object.values(workspaces.allWorkspaces);
   const workspaceUsers = useSelector(
     (state) => state.workspaces.current.members
   );
@@ -45,7 +42,7 @@ const NavBar = ({ joinedWorkspaces }) => {
   const [currentWorkspace, setCurrentWorkspace] = useState(
     joinedWorkspaces[0].workspace
   );
-  const [showWorkspaces, setShowWorkspaces] = useState(false);
+  const [showWorkspaceOptions, setShowWorkspaceOptions] = useState(false);
   const channels = useSelector((state) => state.workspaces.current.channels);
   const [addChannel, setChannelAdd] = useState(false);
   const isOwned = currentWorkspace?.ownerId === userId;
@@ -53,16 +50,15 @@ const NavBar = ({ joinedWorkspaces }) => {
   const handleDelete = (e) => {
     e.preventDefault();
     dispatch(deleteAWorkspace(currentWorkspace.id));
-    // setCurrentWorkspace(workspacesArr[0]);
     setCurrentWorkspace(joinedWorkspaces[0].workspace);
     history.push('/');
   };
 
   useEffect(async () => {
-    await dispatch(getWorkspaces());
+    // await dispatch(getWorkspaces());
     await dispatch(getJoinedWorkspaces());
     await dispatch(getOwnedWorkspaces());
-  }, [dispatch, showWorkspaces, editForm, currentWorkspace]);
+  }, [dispatch, editForm, currentWorkspace, addChannel]);
 
   let users = [];
   for (let i = 0; i < workspaceUsers?.length; i++) {
@@ -87,16 +83,41 @@ const NavBar = ({ joinedWorkspaces }) => {
   }, [dispatch]);
 
   const handleChannelAdd = () => {
-    setChannelAdd(true);
+    setChannelAdd(!addChannel);
   };
-
+  //TODO: amke the edit and delete functions a drop down, not floating
   return (
     <main className="main-workspace-container">
       <div className="workspace-nav">
-        {joinedWorkspaces.map((workspace) => {
-          console.log(workspace.workspace);
+        {ownedWorkspaces.map((workspace) => {
           return (
-            <div className="workspace-in-workspace-list">
+            <div
+              className="workspace-in-workspace-list"
+              onClick={() => {
+                console.log(workspace);
+                history.push(`/${workspace.id}/${workspace?.channels[0]?.id}`);
+                setCurrentWorkspace(workspace);
+              }}
+            >
+              {workspace?.img ? (
+                <img src={workspace?.img}></img>
+              ) : (
+                <div>no photos</div>
+              )}
+            </div>
+          );
+        })}
+        {joinedWorkspaces.map((workspace) => {
+          return (
+            <div
+              className="workspace-in-workspace-list"
+              onClick={() => {
+                history.push(
+                  `/${workspace.workspace.id}/${workspace.workspace.channels[0].id}`
+                );
+                setCurrentWorkspace(workspace.workspace);
+              }}
+            >
               {workspace.workspace.img ? (
                 <img src={workspace.workspace.img}></img>
               ) : (
@@ -105,20 +126,16 @@ const NavBar = ({ joinedWorkspaces }) => {
             </div>
           );
         })}
-        <div className="workspace-in-workspace-list">
-          {' '}
+        <div
+          className="workspace-in-workspace-list add-workspace"
+          onClick={() => {
+            setShowForm(true);
+          }}
+        >
           <img src={add}></img>
         </div>
       </div>
-      <nav
-        className="main-nav"
-        onClick={(e) => {
-          e.preventDefault();
-          if (showWorkspaces) {
-            setShowWorkspaces(false);
-          }
-        }}
-      >
+      <nav className="main-nav">
         <div
           className="current"
           onClick={(e) => {
@@ -129,7 +146,7 @@ const NavBar = ({ joinedWorkspaces }) => {
             className="current-workspace"
             onClick={(e) => {
               // e.preventDefault();
-              setShowWorkspaces(!showWorkspaces);
+              setShowWorkspaceOptions(!showWorkspaceOptions);
             }}
           >
             {currentWorkspaceName ? currentWorkspaceName : ''}
@@ -153,39 +170,15 @@ const NavBar = ({ joinedWorkspaces }) => {
           )}
         </div>
 
-        {showWorkspaces && (
-          <div className="list-workspaces">
-            {showWorkspaces &&
-              joinedWorkspaces.map((workspace) => {
-                console.log(workspace.workspace);
-                return (
-                  <NavLink
-                    key={workspace.workspace.id}
-                    to={`/${workspace.workspace.id}/${workspace.workspace.channels[0].id}`}
-                    onClick={() => {
-                      setCurrentWorkspace(workspace.workspace);
-                      setShowWorkspaces(false);
-                    }}
-                  >
-                    {workspace.workspace.name}
-                  </NavLink>
-                );
-              })}
-            <div
-              className="add-workspace"
-              onClick={() => {
-                setShowForm(true);
-                setShowWorkspaces(false);
-              }}
-            >
-              <img src={add}></img> Add Workspace
-            </div>
-          </div>
-        )}
         <div className="seperator">----------</div>
         <Channels setCurrentWorkspace={setCurrentWorkspace} />
       </nav>
-      {showForm && <CreateWorkspaceModal hideForm={() => setShowForm(false)} />}
+      {showForm && (
+        <CreateWorkspaceModal
+          hideForm={() => setShowForm(false)}
+          setChannelAdd={setChannelAdd}
+        />
+      )}
       {editForm && (
         <EditWorkspaceModal
           setEditForm={setEditForm}
