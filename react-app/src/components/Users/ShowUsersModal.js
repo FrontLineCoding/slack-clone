@@ -12,13 +12,14 @@ const ShowUsersModal = ({ setShowUserSearch, currentMembers }) => {
   const currentMembersIds = currentMembers.map(
     (currentMember) => currentMember.id
   );
-
+  const addableUsersArray = [];
   const addableUsers = allUsers.map((user) => {
     if (
       currentMembersIds.find((currentMemberId) => currentMemberId === user.id)
     ) {
       return;
     } else {
+      addableUsersArray.push(user);
       return user;
     }
   });
@@ -30,7 +31,7 @@ const ShowUsersModal = ({ setShowUserSearch, currentMembers }) => {
   return (
     <div className="usersearch-modal">
       <Modal onClose={() => setShowModal(false)} showModal={showModal}>
-        {addableUsers.slice(currentMembers.length).map((user) => {
+        {addableUsersArray.map((user) => {
           return (
             <div className="usersearch-individual-user" key={user?.id}>
               {user?.img ? (
