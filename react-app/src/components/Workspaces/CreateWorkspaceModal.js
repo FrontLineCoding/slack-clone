@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import CreateWorkspaceForm from '../Nav/CreateWorkspaceForm';
 
-const CreateWorkspaceModal = ({ hideForm, setChannelAdd }) => {
+const CreateWorkspaceModal = ({ hideForm, setChannelAdd, addChannel }) => {
   const [showModal, setShowModal] = useState(false);
   setChannelAdd(false);
 
@@ -13,6 +13,7 @@ const CreateWorkspaceModal = ({ hideForm, setChannelAdd }) => {
           onClose={() => setShowModal(false)}
           hideForm={hideForm}
           setChannelAdd={setChannelAdd}
+          addChannelValue={addChannel}
         />
       </Modal>
     </div>

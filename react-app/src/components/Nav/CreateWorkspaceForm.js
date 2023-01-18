@@ -4,9 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { addUserToWorkspace } from '../../store/users';
 
 import { addWorkspace } from '../../store/workspace';
+import { addChannel } from '../../store/channels';
 import './Nav.css';
+import { authenticate } from '../../store/session';
 
-const CreateWorkspaceForm = ({ hideForm, setChannelAdd }) => {
+const CreateWorkspaceForm = ({ hideForm, setChannelAdd, addChannelValue }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -57,9 +59,12 @@ const CreateWorkspaceForm = ({ hideForm, setChannelAdd }) => {
     if (name) {
       const data = await dispatch(addWorkspace(createdWorkspace)).then(
         (res) => {
-          setChannelAdd(true);
-          console.log(res);
           dispatch(addUserToWorkspace(user.id, res?.id));
+          dispatch(
+            addChannel(res?.id, { name: 'General', workspace_id: res.id })
+          );
+          dispatch(authenticate());
+          setChannelAdd(!addChannelValue);
         }
       );
       hideForm();

@@ -22,6 +22,7 @@ import Channels from '../Channels/Channels';
 import CreateWorkspaceModal from '../Workspaces/CreateWorkspaceModal';
 import EditWorkspaceModal from '../Workspaces/EditWorkspaceModal';
 import { getChannels } from '../../store/channels';
+import { authenticate } from '../../store/session';
 
 const NavBar = ({ joinedWorkspaces }) => {
   const dispatch = useDispatch();
@@ -50,14 +51,17 @@ const NavBar = ({ joinedWorkspaces }) => {
   const handleDelete = (e) => {
     e.preventDefault();
     dispatch(deleteAWorkspace(currentWorkspace.id));
+    dispatch(getJoinedWorkspaces());
+    dispatch(authenticate());
     setCurrentWorkspace(joinedWorkspaces[0].workspace);
     history.push('/');
   };
 
   useEffect(async () => {
     // await dispatch(getWorkspaces());
+    dispatch(authenticate());
     await dispatch(getJoinedWorkspaces());
-    await dispatch(getOwnedWorkspaces());
+    // await dispatch(getOwnedWorkspaces());
   }, [dispatch, editForm, currentWorkspace, addChannel]);
 
   let users = [];
@@ -89,24 +93,6 @@ const NavBar = ({ joinedWorkspaces }) => {
   return (
     <main className="main-workspace-container">
       <div className="workspace-nav">
-        {ownedWorkspaces.map((workspace) => {
-          return (
-            <div
-              className="workspace-in-workspace-list"
-              onClick={() => {
-                console.log(workspace);
-                history.push(`/${workspace.id}/${workspace?.channels[0]?.id}`);
-                setCurrentWorkspace(workspace);
-              }}
-            >
-              {workspace?.img ? (
-                <img src={workspace?.img}></img>
-              ) : (
-                <div>no photos</div>
-              )}
-            </div>
-          );
-        })}
         {joinedWorkspaces.map((workspace) => {
           return (
             <div
@@ -177,6 +163,7 @@ const NavBar = ({ joinedWorkspaces }) => {
         <CreateWorkspaceModal
           hideForm={() => setShowForm(false)}
           setChannelAdd={setChannelAdd}
+          addChannel={addChannel}
         />
       )}
       {editForm && (

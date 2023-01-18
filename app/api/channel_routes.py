@@ -66,6 +66,7 @@ def edit_a_channel(workspaceId, channelId):
     return {"error": "Unauthorized user"}
 
 
+
 @channel_workspace_routes.route("/<int:channelId>/workspaces/<int:workspaceId>", methods=['DELETE'])
 @login_required
 def delete_a_channel(channelId, workspaceId):
