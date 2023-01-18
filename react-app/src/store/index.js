@@ -4,6 +4,7 @@ import channelReducer from './channels';
 import commentsReducer from './comments';
 import messagesReducer from './messages';
 import session from './session';
+import usersReducer from './users';
 import workspaceReducer from './workspace';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   channels: channelReducer,
   messages: messagesReducer,
   comments: commentsReducer,
+  users: usersReducer,
 });
 
 let enhancer;

@@ -1,0 +1,47 @@
+.usersearch-modal > Modal {
+  overflow-y: scroll;
+  height: 10px;
+}
+
+.usersearch-individual-user {
+  padding: 2px 10px;
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+}
+.usersearch-individual-user:hover {
+  cursor: pointer;
+}
+
+.usersearch-close-button {
+  margin-left: 6px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  padding-right: 1px;
+  padding-left: 1px;
+  background-color: #c85a00;
+  width: fit-content;
+  border-radius: 5px;
+}
+.usersearch-close-button:hover {
+  cursor: pointer;
+}
+.usersearch-user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.usersearch-user-no-img {
+  display: flex;
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.usersearch-user-name {
+  padding-left: 10px;
+}

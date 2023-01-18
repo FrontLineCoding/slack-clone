@@ -156,7 +156,7 @@ const NavBar = ({ joinedWorkspaces }) => {
           )}
         </div>
 
-        <div className="seperator">----------</div>
+        <div className="seperator"></div>
         <Channels setCurrentWorkspace={setCurrentWorkspace} />
       </nav>
       {showForm && (

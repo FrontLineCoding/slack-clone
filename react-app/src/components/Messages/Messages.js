@@ -9,7 +9,10 @@ import {
 import CreateMessage from './CreateMessage';
 import SingleMessage from './SingleMessage';
 import more from '../../svgFiles/more.svg';
+import add from '../../svgFiles/add.svg';
 import './Messages.css';
+import ShowUsersModal from '../Users/ShowUsersModal';
+import { fetchUsers } from '../../store/users';
 
 const Messages = () => {
   const dispatch = useDispatch();
@@ -22,6 +25,7 @@ const Messages = () => {
   const messageArr = Object.values(messages);
   const [menu, setShowMenu] = useState(true);
   const [edit, setEdit] = useState(false);
+  const [showUserSearch, setShowUserSearch] = useState(false);
 
   let users = [];
   for (let i = 0; i < userWorkspaces?.length; i++) {
@@ -32,11 +36,19 @@ const Messages = () => {
     dispatch(fetchMessages(channelId));
   }, [dispatch, channelId]);
 
+  const handleAddUser = () => {
+    setShowUserSearch(true);
+  };
+
   return (
     <div className="message-component">
       <div className="upper-div">
         <div className="work-space-users">
-          {console.log('users: ', users)}
+          <img
+            src={add}
+            className="add-user-to-workspace"
+            onClick={handleAddUser}
+          />
           {users?.map((user) => {
             return user?.img ? (
               <div className={`workspace-user-pic`}>
@@ -61,6 +73,12 @@ const Messages = () => {
       <section className="create-messages-div">
         <CreateMessage />
       </section>
+      {showUserSearch && (
+        <ShowUsersModal
+          setShowUserSearch={setShowUserSearch}
+          currentMembers={users}
+        ></ShowUsersModal>
+      )}
     </div>
   );
 };

@@ -76,6 +76,9 @@ main {
   font-size: 22px;
   color: white;
 }
+.current-workspace:hover {
+  cursor: pointer;
+}
 
 .channels-container {
   display: flex;

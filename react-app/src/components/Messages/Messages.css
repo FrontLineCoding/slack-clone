@@ -1,3 +1,16 @@
+.add-user-to-workspace {
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 3px;
+  padding: 3px;
+  margin-right: 6px;
+}
+.add-user-to-workspace:hover {
+  background-color: #c85a00;
+  border-radius: 50%;
+  transition: border-radius, 2s;
+  cursor: pointer;
+}
+
 .hide {
   display: none;
 }
