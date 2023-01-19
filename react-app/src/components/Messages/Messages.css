@@ -10,6 +10,18 @@
   transition: border-radius, 2s;
   cursor: pointer;
 }
+.remove-user-from-workspace {
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 3px;
+  padding: 3px;
+  margin-right: 6px;
+}
+.remove-user-from-workspace:hover {
+  background-color: #b40000;
+  border-radius: 50%;
+  transition: border-radius, 2s;
+  cursor: pointer;
+}
 
 .hide {
   display: none;

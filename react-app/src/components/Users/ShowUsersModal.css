@@ -45,3 +45,11 @@
 .usersearch-user-name {
   padding-left: 10px;
 }
+.usersearch-instructions {
+  margin: 8px 5px;
+}
+.usersearch-seperator {
+  width: 100%;
+  height: 1px;
+  background-color: black;
+}

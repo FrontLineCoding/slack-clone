@@ -7,7 +7,7 @@ import './Comments.css';
 
 const Comments = () => {
   const dispatch = useDispatch();
-  const { workspaceId, channelId, messageId } = useParams();
+  const { messageId } = useParams();
   const messageState = useSelector((state) => state.messages);
   const message = Object.values(messageState);
   console.log(message);
@@ -18,12 +18,14 @@ const Comments = () => {
   const messageOwner = workspaceUsers.filter((user) => {
     if (user.id === message[0].user_id) {
       return user;
+    } else {
+      return;
     }
   });
   let displayMessage;
   useEffect(() => {
     dispatch(fetchComments(messageId));
-  }, [messageId]);
+  }, [messageId, dispatch]);
 
   for (let property in messageState) {
     if (property === messageId) {
@@ -40,6 +42,7 @@ const Comments = () => {
               <img
                 src={messageOwner[0].img}
                 className="message-owner-picture"
+                alt="the message owner's"
               ></img>
             </div>
           ) : (

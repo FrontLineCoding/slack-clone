@@ -23,3 +23,14 @@ def add_user_to_workspace(userId, workspaceId):
         return{"message": f"{userId} added to workspace: {workspaceId}"}
     else:
         return {"error": "User unable to be added"}
+
+@workspacemember_routes.route('/<int:userId>/<int:workspaceId>', methods=['DELETE'])
+def remove_user_from_workspace(userId, workspaceId):
+    workspace_member = db.session.query(WorkspaceMember).filter(WorkspaceMember.user_id == userId, WorkspaceMember.workspace_id == workspaceId).first()
+
+    if(workspace_member):
+        db.session.delete(workspace_member)
+        db.session.commit()
+        return{"message": f"{userId} was removed from workspace: {workspaceId}"}
+    else:
+        return {"error": "User unable to be removed"}

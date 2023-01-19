@@ -3,22 +3,14 @@ import NavBar from '../Nav/NavBar';
 import Messages from '../Messages/Messages';
 import './MainPage.css';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  getJoinedWorkspaces,
-  getOwnedWorkspaces,
-  getWorkspaces,
-} from '../../store/workspace';
-import CreateChannel from '../Channels/CreateChannel';
 import EditChannel from '../Channels/EditChannel';
 import CreateChannelModal from '../Channels/CreateChannelModal';
 import AuthNav from '../auth/AuthNav';
 import Comments from '../Comments/Comments';
 
 const MainPage = ({ user }) => {
-  const dispatch = useDispatch();
   const history = useHistory();
-  const { workspaceId, channelId } = useParams();
+  const { workspaceId } = useParams();
   useEffect(() => {
     if (!workspaceId) {
       history.push(
@@ -26,12 +18,6 @@ const MainPage = ({ user }) => {
       );
     }
   }, []);
-
-  //   useEffect(async () => {
-  //     await dispatch(getWorkspaces());
-  //     await dispatch(getJoinedWorkspaces());
-  //     await dispatch(getOwnedWorkspaces());
-  //   }, [dispatch]);
 
   return (
     <>

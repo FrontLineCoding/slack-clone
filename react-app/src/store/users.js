@@ -34,6 +34,15 @@ export const addUserToWorkspace = (userId, workspaceId) => async (dispatch) => {
   });
 };
 
+export const removeUserFromWorkspace =
+  (userId, workspaceId) => async (dispatch) => {
+    const res = await fetch(`/api/workspacemembers/${userId}/${workspaceId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, workspaceId }),
+    });
+  };
+
 const initialState = {};
 
 const usersReducer = (state = initialState, action) => {

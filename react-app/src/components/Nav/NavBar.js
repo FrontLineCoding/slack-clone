@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
-import { fetchUsers } from '../../store/users';
+import { useHistory } from 'react-router-dom';
+import { fetchUsers, removeUserFromWorkspace } from '../../store/users';
 import {
   deleteAWorkspace,
   getJoinedWorkspaces,
-  getOwnedWorkspaces,
   getWorkspaceById,
-  getWorkspaces,
 } from '../../store/workspace';
 import dropDown from '../../svgFiles/drop-down.svg';
 import add from '../../svgFiles/add.svg';
 import edit from '../../svgFiles/edit.svg';
 import cancel from '../../svgFiles/cancel.svg';
 import './Nav.css';
-import CreateWorkspaceForm from './CreateWorkspaceForm';
-import EditWorkspaceForm from './EditWorkspaceForm';
-import CreateChannel from '../Channels/CreateChannel';
 import Channels from '../Channels/Channels';
 import CreateWorkspaceModal from '../Workspaces/CreateWorkspaceModal';
 import EditWorkspaceModal from '../Workspaces/EditWorkspaceModal';
@@ -58,10 +53,8 @@ const NavBar = ({ joinedWorkspaces }) => {
   };
 
   useEffect(async () => {
-    // await dispatch(getWorkspaces());
     dispatch(authenticate());
-    await dispatch(getJoinedWorkspaces());
-    // await dispatch(getOwnedWorkspaces());
+    dispatch(getJoinedWorkspaces());
   }, [dispatch, editForm, currentWorkspace, addChannel]);
 
   let users = [];
@@ -89,6 +82,11 @@ const NavBar = ({ joinedWorkspaces }) => {
   const handleChannelAdd = () => {
     setChannelAdd(!addChannel);
   };
+  const handleLeaveWorkspace = () => {
+    dispatch(removeUserFromWorkspace(userId, currentWorkspace.id));
+    history.push('/');
+  };
+
   //TODO: amke the edit and delete functions a drop down, not floating
   return (
     <main className="main-workspace-container">
@@ -155,7 +153,17 @@ const NavBar = ({ joinedWorkspaces }) => {
             ></img>
           )}
         </div>
-
+        {showWorkspaceOptions && (
+          <div className="workspace-options">
+            <p
+              onClick={() => {
+                handleLeaveWorkspace();
+              }}
+            >
+              Leave Workspace
+            </p>
+          </div>
+        )}
         <div className="seperator"></div>
         <Channels setCurrentWorkspace={setCurrentWorkspace} />
       </nav>

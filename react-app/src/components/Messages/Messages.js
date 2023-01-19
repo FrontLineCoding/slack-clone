@@ -10,8 +10,10 @@ import CreateMessage from './CreateMessage';
 import SingleMessage from './SingleMessage';
 import more from '../../svgFiles/more.svg';
 import add from '../../svgFiles/add.svg';
+import cancel from '../../svgFiles/cancel.svg';
 import './Messages.css';
 import ShowUsersModal from '../Users/ShowUsersModal';
+import RemoveUsersFromWorkspaceModal from '../Users/RemoveUsersFromWorkspaceModal';
 import { fetchUsers } from '../../store/users';
 
 const Messages = () => {
@@ -22,10 +24,13 @@ const Messages = () => {
     (state) => state.workspaces.current.members
   );
   const userId = useSelector((state) => state.session.user.id);
+  const currentWorkspace = useSelector((state) => state.workspaces.current);
+  const isOwned = userId === currentWorkspace.ownerId;
   const messageArr = Object.values(messages);
   const [menu, setShowMenu] = useState(true);
   const [edit, setEdit] = useState(false);
   const [showUserSearch, setShowUserSearch] = useState(false);
+  const [showRemoveUser, setShowRemoveUser] = useState(false);
 
   let users = [];
   for (let i = 0; i < userWorkspaces?.length; i++) {
@@ -39,11 +44,21 @@ const Messages = () => {
   const handleAddUser = () => {
     setShowUserSearch(true);
   };
+  const handleRemoveUsers = () => {
+    setShowRemoveUser(true);
+  };
 
   return (
     <div className="message-component">
       <div className="upper-div">
         <div className="work-space-users">
+          {isOwned && (
+            <img
+              src={cancel}
+              className="remove-user-from-workspace"
+              onClick={handleRemoveUsers}
+            />
+          )}
           <img
             src={add}
             className="add-user-to-workspace"
@@ -78,6 +93,12 @@ const Messages = () => {
           setShowUserSearch={setShowUserSearch}
           currentMembers={users}
         ></ShowUsersModal>
+      )}
+      {showRemoveUser && (
+        <RemoveUsersFromWorkspaceModal
+          setShowRemoveUser={setShowRemoveUser}
+          currentMembers={users}
+        ></RemoveUsersFromWorkspaceModal>
       )}
     </div>
   );
