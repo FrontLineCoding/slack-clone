@@ -37,7 +37,7 @@ def seed_comments():
 # dependent entities
 def undo_comments():
     if os.environ.get("FLASK_ENV") == 'development':
-        db.session.execute('DELETE FROM messages;')
+        db.session.execute('DELETE FROM comments;')
     else:
-        db.session.execute('TRUNCATE messages RESTART IDENTITY CASCADE;')
+        db.session.execute('TRUNCATE comments RESTART IDENTITY CASCADE;')
     db.session.commit()

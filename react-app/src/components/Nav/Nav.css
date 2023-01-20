@@ -11,23 +11,24 @@ main {
 .main-nav {
   display: flex;
   flex-direction: column;
-  width: 140px;
+  width: 280px;
   padding-left: 5px;
 }
 .workspace-nav {
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(200, 200, 200, 0.5);
-  width: 45px;
+  width: 55px;
 }
 .workspace-in-workspace-list {
   color: white;
+  margin: 5px;
 }
 .workspace-in-workspace-list > img {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border: 1px solid rgba(200, 200, 200, 0.5);
-  margin: 5px;
+  /* margin: 5px; */
   color: white;
   border-radius: 5px;
   margin-right: 10px;
@@ -36,8 +37,40 @@ main {
 .workspace-in-workspace-list > img:hover {
   /* position: sticky; */
   cursor: pointer;
-  width: 40px;
+  width: 45px;
+  height: 44px;
+}
+.no-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 40px;
+  width: 40px;
+  /* margin: 5px; */
+  border-radius: 5px;
+  margin-right: 10px;
+  color: black;
+  background-color: rgba(225, 120, 0, 0.4);
+  font-size: 25px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  transition: all 1s;
+}
+.no-img:hover {
+  /* position: sticky; */
+  cursor: pointer;
+  width: 45px;
+  height: 44px;
+}
+
+.workspace-active {
+  margin: 2px;
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  border: 3px solid white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #ffffff;
 }
 
 .add-workspace:hover > img {
@@ -108,7 +141,6 @@ main {
 }
 
 /* ----------- FORM STYLING ---------- */
-/* TODO take care of the buttons with class names */
 .create-workspace-form-container {
   /* display: flex; */
   /* flex-direction: column; */

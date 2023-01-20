@@ -70,7 +70,6 @@ const SingleMessage = ({ message, users }) => {
             {user?.first_name} {user?.last_name}
           </div>
           {message.content}
-          {/*
           <div className="comments-link-div">
             <NavLink
               className={`comment-link`}
@@ -79,21 +78,26 @@ const SingleMessage = ({ message, users }) => {
               replies
             </NavLink>
           </div>
-*/}
         </div>
       </div>
+
       {menu ? (
-        <img
-          id={`more-options-img-${message.id}`}
-          className={`more-options-div hide`}
-          src={more}
-          onClick={(e) => {
-            setShowMenu(false);
-          }}
-        ></img>
+        isOwned && (
+          <img
+            id={`more-options-img-${message.id}`}
+            className={`more-options-div hide`}
+            src={more}
+            onClick={(e) => {
+              setShowMenu(false);
+            }}
+          ></img>
+        )
       ) : (
         <div id={`${message.id}`} className={`more-options-menu`}>
           <ul
+            onMouseLeave={() => {
+              setShowMenu(true);
+            }}
             onClick={(e) => {
               handleMoreOptions(e, message);
             }}

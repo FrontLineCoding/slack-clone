@@ -51,7 +51,6 @@ const Channels = () => {
             <img src={add} className="channel-add" alt="add svg file"></img>
           </button>
         )}
-        {/* TODO setting up modal for channel creation. currently prop threading */}
         {showModal && <CreateChannelModal setShowModal={setShowModal} />}
         {showEdit && <EditChannelModal setShowEdit={setShowEdit} />}
       </div>
@@ -62,6 +61,7 @@ const Channels = () => {
             <NavLink
               key={`${channel.id}`}
               to={`/${currentWorkspace.id}/${channel.id}`}
+              activeClassName="channel-active"
             >
               {channel.name}
             </NavLink>

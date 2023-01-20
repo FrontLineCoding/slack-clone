@@ -30,7 +30,12 @@ const AuthNav = () => {
   return (
     <div className="auth-nav">
       {showUserOptions && (
-        <div className="user-options">
+        <div
+          className="user-options"
+          onMouseLeave={() => {
+            setShowUserOptions(false);
+          }}
+        >
           <div onClick={handleChangeImage}>Update Profile Information</div>
         </div>
       )}

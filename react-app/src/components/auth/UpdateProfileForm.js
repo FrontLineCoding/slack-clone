@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../store/users';
 import './UpdateProfileForm.css';
-
+//TODO: Not updating pictures pictures
 const UpdateProfileForm = ({ user, hideForm }) => {
-  console.log(user);
   const [errors, setErrors] = useState([]);
   const [firstName, setFirstName] = useState(user?.first_name);
   const [lastName, setLastName] = useState(user?.last_name);

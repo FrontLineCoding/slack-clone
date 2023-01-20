@@ -10,6 +10,10 @@ form > div {
   align-items: center;
 }
 
+.user-options:hover {
+  cursor: pointer;
+}
+
 .button {
   margin-top: 2rem;
   font-size: 20px;
@@ -39,6 +43,9 @@ form > div {
   border-radius: 50%;
   margin-top: 2px;
   padding: 3px;
+}
+.auth-user-pic:hover {
+  cursor: pointer;
 }
 
 .email-div > input {
@@ -73,6 +80,9 @@ form > div {
   display: flex;
   flex-direction: row;
   color: rgb(255, 255, 255);
+}
+.initials:hover {
+  cursor: pointer;
 }
 
 .user-options {

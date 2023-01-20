@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { fetchUsers, removeUserFromWorkspace } from '../../store/users';
 import {
   deleteAWorkspace,
@@ -87,11 +87,29 @@ const NavBar = ({ joinedWorkspaces }) => {
     history.push('/');
   };
 
-  //TODO: amke the edit and delete functions a drop down, not floating
+  //TODO: make the edit and delete functions a drop down, not floating -----  Maybe
+  // TODO: When selecting a new channel the current workspace loses its active status
   return (
     <main className="main-workspace-container">
       <div className="workspace-nav">
         {joinedWorkspaces.map((workspace) => {
+          return (
+            <NavLink
+              activeClassName="workspace-active"
+              className="workspace-in-workspace-list"
+              to={`/${workspace.workspace.id}/${workspace.workspace.channels[0].id}`}
+              onClick={() => {
+                setCurrentWorkspace(workspace.workspace);
+              }}
+            >
+              {workspace.workspace.img ? (
+                <img src={workspace.workspace.img}></img>
+              ) : (
+                <div className="no-img">{workspace.workspace.name[0]}</div>
+              )}
+            </NavLink>
+          );
+
           return (
             <div
               className="workspace-in-workspace-list"
@@ -105,7 +123,9 @@ const NavBar = ({ joinedWorkspaces }) => {
               {workspace.workspace.img ? (
                 <img src={workspace.workspace.img}></img>
               ) : (
-                <div>no photos</div>
+                <div className="workspace-in-workspace-list no-img">
+                  {workspace.workspace.name[0]}
+                </div>
               )}
             </div>
           );
@@ -154,7 +174,12 @@ const NavBar = ({ joinedWorkspaces }) => {
           )}
         </div>
         {showWorkspaceOptions && (
-          <div className="workspace-options">
+          <div
+            className="workspace-options"
+            onMouseLeave={() => {
+              setShowWorkspaceOptions(false);
+            }}
+          >
             <p
               onClick={() => {
                 handleLeaveWorkspace();

@@ -32,6 +32,7 @@ const Comments = () => {
       displayMessage = messageState[property];
     }
   }
+  //TODO: Image is wrong when loading the original message owner.img
 
   return (
     <div className="comments-main-container">

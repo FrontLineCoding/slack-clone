@@ -23,3 +23,10 @@
   padding: 3px 5px;
   padding-bottom: 5px;
 }
+
+.signup-form-photo {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-left: 20px;
+}

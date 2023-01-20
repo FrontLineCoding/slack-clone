@@ -1,49 +1,50 @@
-.channels{
-    display: flex;
-    flex-direction: column;
+.channels {
+  display: flex;
+  flex-direction: column;
 }
 
-.show-channels{
-    display: flex;
-    color: white;
-    font-size: 20px;
+.show-channels {
+  display: flex;
+  color: white;
+  font-size: 20px;
 }
 
-.hide{
-    display: none;
+.hide {
+  display: none;
 }
 
-.single-channel{
-    display: flex;
-    justify-content: space-between;
+.single-channel {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
 }
 .single-channel:hover > .hide,
-.single-channel:hover > a > .hide
-{
-    display: block;
-    cursor: pointer;
+.single-channel:hover > a > .hide {
+  display: block;
+  cursor: pointer;
 }
 
-.single-channel  > a {
-    color: rgb(200, 200, 200);
-    font-size: 15px;
-    display: flex;
+.single-channel > a {
+  color: rgb(200, 200, 200);
+  font-size: 18px;
+  display: flex;
 }
 
-.active{
-    color: white;
+.channel-active {
+  background-color: rgba(0, 81, 255, 0.6);
+  width: 100%;
 }
 
-.edit-modal{
-    background-color: aqua;
-    width: 10px
+.edit-modal {
+  background-color: aqua;
+  width: 10px;
 }
 
-.options{
-    display: flex;
-    flex-direction: row;
+.options {
+  display: flex;
+  flex-direction: row;
 }
 
-.single-channel:hover > div > .hide{
-    display: flex;
+.single-channel:hover > div > .hide {
+  display: flex;
 }
