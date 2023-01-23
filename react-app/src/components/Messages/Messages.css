@@ -32,6 +32,9 @@
   padding: 10px;
   color: rgb(200, 200, 200);
 }
+.individual-message:hover {
+  cursor: default;
+}
 
 .message-component {
   display: flex;
@@ -226,6 +229,13 @@ section > .create-messages-div > form {
 }
 
 .div-for-flex-end {
+}
+
+.comment-link {
+  color: white;
+}
+.comment-link:hover {
+  cursor: pointer;
 }
 
 /* **** SCROLLBAR ************************* SCROLLBAR ********************************* SCROLLBAR ******* */

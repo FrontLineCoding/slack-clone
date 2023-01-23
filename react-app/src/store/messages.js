@@ -39,7 +39,6 @@ const clearMessages = () => {
 };
 
 export const fetchMessages = (channelId) => async (dispatch) => {
-  console.log(channelId);
   const res = await fetch(`/api/messages/channels/${channelId}`);
   const data = await res.json();
   if (res.ok) {

@@ -9,7 +9,6 @@ const ShowUsersModal = ({ setShowUserSearch, currentMembers }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const currentWorkspace = useSelector((state) => state.workspaces.current);
-  console.log(currentWorkspace);
   const users = useSelector((state) => state.users);
   const allUsers = Object.values(users);
   const currentMembersIds = currentMembers.map(

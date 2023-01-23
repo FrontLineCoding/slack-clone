@@ -129,6 +129,10 @@ main {
   font-size: 18px;
 }
 
+.show-channels:hover {
+  cursor: default;
+}
+
 .channel-add:hover {
   cursor: pointer;
 }
