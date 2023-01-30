@@ -38,6 +38,7 @@ const NavBar = ({ joinedWorkspaces }) => {
   const [currentWorkspace, setCurrentWorkspace] = useState(
     joinedWorkspaces[0].workspace
   );
+  const [prevWorkspace, setPrevWorkspace] = useState('');
   const [showWorkspaceOptions, setShowWorkspaceOptions] = useState(false);
   const channels = useSelector((state) => state.workspaces.current.channels);
   const [addChannel, setChannelAdd] = useState(false);
@@ -95,10 +96,12 @@ const NavBar = ({ joinedWorkspaces }) => {
         {joinedWorkspaces.map((workspace) => {
           return (
             <NavLink
-              activeClassName="workspace-active"
+              id={workspace?.workspace?.id}
+              // activeClassName="workspace-active"
               className="workspace-in-workspace-list"
-              to={`/${workspace.workspace.id}/${workspace.workspace.channels[0].id}`}
+              to={`/${workspace?.workspace?.id}/${workspace?.workspace?.channels[0]?.id}`}
               onClick={() => {
+                setPrevWorkspace(currentWorkspace);
                 setCurrentWorkspace(workspace.workspace);
               }}
             >
@@ -190,7 +193,7 @@ const NavBar = ({ joinedWorkspaces }) => {
           </div>
         )}
         <div className="seperator"></div>
-        <Channels setCurrentWorkspace={setCurrentWorkspace} />
+        <Channels prevWorkspace={prevWorkspace} />
       </nav>
       {showForm && (
         <CreateWorkspaceModal

@@ -26,7 +26,18 @@ const SingleComment = ({ users, commentCreated }) => {
       {comments.map((comment) => {
         return (
           <div key={comment?.id} className="main-comment-holder">
-            <img className="comment-user-photo" src={comment?.user?.img}></img>
+            {comment?.user?.img ? (
+              <img
+                className="comment-user-photo"
+                src={comment?.user?.img}
+              ></img>
+            ) : (
+              <div className="comment-user-initials">
+                {comment?.user?.first_name[0]}
+                {comment?.user?.last_name[0]}
+              </div>
+            )}
+
             <div className="comment-name-and-content-holder">
               <div className="comment-name">
                 {comment?.user?.first_name} {comment?.user?.last_name}

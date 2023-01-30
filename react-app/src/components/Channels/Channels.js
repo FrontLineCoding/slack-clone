@@ -10,7 +10,7 @@ import './Channels.css';
 import CreateChannelModal from './CreateChannelModal';
 import EditChannelModal from './EditChannelModal';
 
-const Channels = () => {
+const Channels = ({ prevWorkspace }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const currentWorkspace = useSelector((state) => state.workspaces.current);
@@ -18,6 +18,7 @@ const Channels = () => {
   const channelsArr = Object.values(channels);
   const user = useSelector((state) => state.session.user);
   const isOwned = currentWorkspace?.ownerId === user.id;
+  const [currentchannel, setCurrentChannel] = useState();
   const [showModal, setShowModal] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
@@ -36,6 +37,28 @@ const Channels = () => {
   useEffect(() => {
     dispatch(getWorkspaceById(currentWorkspace?.id));
   }, [showModal]);
+
+  useEffect(() => {
+    if (prevWorkspace) {
+      const removeActiveStatus = document.getElementById(prevWorkspace.id);
+      removeActiveStatus.className = 'workspace-in-workspace-list';
+    }
+    if (currentWorkspace) {
+      const addActiveStatus = document.getElementById(currentWorkspace.id);
+      if (addActiveStatus) {
+        addActiveStatus.className =
+          'workspace-in-workspace-list workspace-active';
+      }
+      console.log(addActiveStatus);
+    }
+
+    return () => {
+      const cleanUpActiveStatus = document.getElementById(currentWorkspace.id);
+      if (cleanUpActiveStatus) {
+        cleanUpActiveStatus.className = 'workspace-in-workspace-list';
+      }
+    };
+  }, [currentchannel, currentWorkspace]);
 
   return (
     <div className="channels">
@@ -62,6 +85,9 @@ const Channels = () => {
               key={`${channel.id}`}
               to={`/${currentWorkspace.id}/${channel.id}`}
               activeClassName="channel-active"
+              onClick={() => {
+                setCurrentChannel(channel);
+              }}
             >
               {channel.name}
             </NavLink>

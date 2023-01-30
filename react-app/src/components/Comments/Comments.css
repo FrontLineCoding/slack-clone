@@ -44,6 +44,16 @@
   width: 50px;
   border-radius: 50%;
 }
+.comment-user-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
 .main-comment-holder {
   display: flex;
   margin-bottom: 10px;

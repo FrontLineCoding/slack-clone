@@ -5,7 +5,7 @@ import { fetchComments } from '../../store/comments';
 import SingleComment from './SingleComment';
 import './Comments.css';
 import CreateComment from './CreateComment';
-
+// TODO: replies not rending live
 const Comments = () => {
   const dispatch = useDispatch();
   const { messageId } = useParams();

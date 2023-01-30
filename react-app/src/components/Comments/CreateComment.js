@@ -28,6 +28,7 @@ const CreateComment = ({ commentCreated, setCommentCreated }) => {
         return;
       } else {
         setCommentContent('');
+        setCommentCreated(!commentCreated);
         setErrors([]);
       }
     });
