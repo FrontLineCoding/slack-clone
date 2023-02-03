@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { fetchComments } from '../../store/comments';
 import SingleComment from './SingleComment';
 import './Comments.css';
 import CreateComment from './CreateComment';
-// TODO: replies not rending live
+// TODO: cannot remove replies page
 const Comments = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { workspaceId, channelId } = useParams();
   const { messageId } = useParams();
   const [commentCreated, setCommentCreated] = useState(false);
   const messageState = useSelector((state) => state.messages);
@@ -32,6 +34,10 @@ const Comments = () => {
       return;
     }
   });
+
+  const handleCloseReplies = () => {
+    history.push(`/${workspaceId}/${channelId}`);
+  };
 
   return (
     <div className="comments-main-container">
@@ -58,6 +64,14 @@ const Comments = () => {
               {messageOwner[0].first_name} {messageOwner[0].last_name}
             </div>
             <div className="message-content">{displayMessage.content}</div>
+          </div>
+          <div
+            className="close-replies"
+            onClick={() => {
+              handleCloseReplies();
+            }}
+          >
+            X
           </div>
         </div>
         <div className="seperator"></div>
