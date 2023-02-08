@@ -95,3 +95,7 @@
 .more:hover {
   cursor: pointer;
 }
+
+.the-comment:hover > .hide {
+  visibility: visible;
+}

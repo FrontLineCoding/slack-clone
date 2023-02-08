@@ -1,13 +1,22 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteSelectedComments, updateComment } from '../../store/comments';
 import more from '../../svgFiles/more.svg';
 
 import './Comments.css';
 
 const TheComment = ({ comment }) => {
+  console.log(comment);
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
-  const isOwned = currentUser.id === comment.user_id;
+  const isOwned = currentUser.id === comment?.user_id;
+
+  const handleMoreOptions = (e) => {
+    if (e.innerText === 'Edit') {
+    } else if (e.innerText === 'Delete') {
+      dispatch(deleteSelectedComments(comment.id));
+    }
+  };
 
   return (
     <div className="the-comment">
@@ -29,11 +38,8 @@ const TheComment = ({ comment }) => {
             <div className="comment-content">{comment?.content}</div>
           </div>
         </div>
-        {comment.user_id === currentUser.id && (
-          <div className="more-options hide">more</div>
-        )}
       </div>
-      {isOwned && <img src={more} className="more" />}
+      {isOwned && <img src={more} className="more hide" />}
     </div>
   );
 };

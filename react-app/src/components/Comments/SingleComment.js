@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchComments } from '../../store/comments';
-
+import more from '../../svgFiles/more.svg';
 import './Comments.css';
 import TheComment from './TheComment';
 
@@ -25,7 +25,7 @@ const SingleComment = ({ users, commentCreated }) => {
 
   return (
     <div>
-      {comments.map((comment) => {
+      {comments?.map((comment) => {
         return <TheComment comment={comment} />;
       })}
     </div>
