@@ -82,9 +82,10 @@
 .more-options {
   visibility: visible;
 }
-.hide:hover {
-  visibility: visible;
+.hidden {
+  visibility: hidden;
 }
+
 .the-comment {
   display: flex;
   justify-content: space-between;
@@ -96,6 +97,96 @@
   cursor: pointer;
 }
 
-.the-comment:hover > .hide {
+.comment-options > ul {
+  list-style: none;
+}
+.comment-options {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  box-shadow: 3px 3px 3px black;
+  padding-right: 20px;
+  margin: 5px 15px 10px 0px;
+  background-color: rgb(30, 30, 30);
+}
+.comment-options > ul > li:hover {
+  cursor: pointer;
+}
+
+.the-comment:hover > .hidden {
   visibility: visible;
+}
+
+.create-comment {
+  background-color: rgba(52, 52, 52, 0.3);
+  height: 7rem;
+  width: 100%;
+  z-index: 2;
+  margin-bottom: 50px;
+}
+.create-comment > form > input {
+  background-color: rgba(52, 52, 52, 0.3);
+  border: solid 1px white;
+  height: 7rem;
+  width: 100%;
+  z-index: 100;
+  color: white;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+section > .create-comment > form {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.single-comment {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity;
+  scrollbar-width: thin;
+  scrollbar-color: green;
+  scroll-snap-align: end;
+  height: 43rem;
+}
+.single-comment > :last-child {
+  scroll-snap-align: end;
+  overflow-anchor: auto;
+}
+
+.comments-upper-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 5px;
+  overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity;
+  scrollbar-width: thin;
+  scrollbar-color: green;
+  scroll-snap-align: end;
+}
+
+/* **** SCROLLBAR ************************* SCROLLBAR ********************************* SCROLLBAR ******* */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(136, 136, 136);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

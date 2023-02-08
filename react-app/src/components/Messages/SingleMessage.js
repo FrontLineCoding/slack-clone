@@ -159,7 +159,6 @@ const SingleMessage = ({ message, users }) => {
               handleMoreOptions(e, message);
             }}
           >
-            <li>Edit</li>
             <li>Delete</li>
           </ul>
         </div>

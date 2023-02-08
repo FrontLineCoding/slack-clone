@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteSelectedComments, updateComment } from '../../store/comments';
 import more from '../../svgFiles/more.svg';
@@ -10,11 +10,16 @@ const TheComment = ({ comment }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.session.user);
   const isOwned = currentUser.id === comment?.user_id;
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
+  const [viewMode, setViewMode] = useState(true);
 
   const handleMoreOptions = (e) => {
     if (e.innerText === 'Edit') {
-    } else if (e.innerText === 'Delete') {
+      setViewMode(false);
+    } else if (e.innerText == 'Delete') {
       dispatch(deleteSelectedComments(comment.id));
+      setShowMoreOptions(!showMoreOptions);
+    } else {
     }
   };
 
@@ -39,7 +44,31 @@ const TheComment = ({ comment }) => {
           </div>
         </div>
       </div>
-      {isOwned && <img src={more} className="more hide" />}
+      {isOwned && !showMoreOptions && (
+        <img
+          src={more}
+          className="more hidden"
+          onClick={() => {
+            setShowMoreOptions(true);
+          }}
+        />
+      )}
+      {showMoreOptions && (
+        <div
+          className="comment-options"
+          onMouseLeave={() => {
+            setShowMoreOptions(false);
+          }}
+          onClick={(e) => {
+            handleMoreOptions(e.target);
+          }}
+        >
+          <ul>
+            <li>Edit</li>
+            <li>Delete</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

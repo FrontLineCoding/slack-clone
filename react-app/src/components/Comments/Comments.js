@@ -41,7 +41,7 @@ const Comments = () => {
 
   return (
     <div className="comments-main-container">
-      <div>
+      <div className="comments-upper-div">
         <div className="starter-message-div">
           <div className="message-owner">
             {messageOwner[0].img ? (

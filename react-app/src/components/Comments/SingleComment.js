@@ -24,7 +24,7 @@ const SingleComment = ({ users, commentCreated }) => {
   const currentUser = useSelector((state) => state.session.user);
 
   return (
-    <div>
+    <div className="all-comments">
       {comments?.map((comment) => {
         return <TheComment comment={comment} />;
       })}

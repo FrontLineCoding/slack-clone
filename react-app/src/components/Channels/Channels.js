@@ -49,7 +49,6 @@ const Channels = ({ prevWorkspace }) => {
         addActiveStatus.className =
           'workspace-in-workspace-list workspace-active';
       }
-      console.log(addActiveStatus);
     }
 
     return () => {

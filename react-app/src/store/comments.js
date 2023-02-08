@@ -77,7 +77,8 @@ export const updateComment = (commentId, comment) => async (dispatch) => {
 };
 
 export const deleteSelectedComments = (commentId) => async (dispatch) => {
-  const res = await fetch(`/api/${commentId}`, {
+  console.log('comments store', commentId);
+  const res = await fetch(`/api/comments/${commentId}`, {
     method: 'DELETE',
   });
 
