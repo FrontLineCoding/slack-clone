@@ -31,6 +31,7 @@ const NavBar = ({ joinedWorkspaces }) => {
   const ownedWorkspaces = Object.values(ownedWorkspacesState);
   const [showForm, setShowForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
+  const [displayChannels, setDisplayChannels] = useState(true);
   const workspaceUsers = useSelector(
     (state) => state.workspaces.current.members
   );
@@ -89,7 +90,6 @@ const NavBar = ({ joinedWorkspaces }) => {
   };
 
   //TODO: make the edit and delete functions a drop down, not floating -----  Maybe
-  // TODO: When selecting a new channel the current workspace loses its active status
   return (
     <main className="main-workspace-container">
       <div className="workspace-nav">
@@ -112,26 +112,6 @@ const NavBar = ({ joinedWorkspaces }) => {
               )}
             </NavLink>
           );
-
-          return (
-            <div
-              className="workspace-in-workspace-list"
-              onClick={() => {
-                history.push(
-                  `/${workspace.workspace.id}/${workspace.workspace.channels[0].id}`
-                );
-                setCurrentWorkspace(workspace.workspace);
-              }}
-            >
-              {workspace.workspace.img ? (
-                <img src={workspace.workspace.img}></img>
-              ) : (
-                <div className="workspace-in-workspace-list no-img">
-                  {workspace.workspace.name[0]}
-                </div>
-              )}
-            </div>
-          );
         })}
         <div
           className="workspace-in-workspace-list add-workspace"
@@ -142,59 +122,81 @@ const NavBar = ({ joinedWorkspaces }) => {
           <img src={add}></img>
         </div>
       </div>
-      <nav className="main-nav">
-        <div
-          className="current"
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <div
-            className="current-workspace"
-            onClick={(e) => {
-              // e.preventDefault();
-              setShowWorkspaceOptions(!showWorkspaceOptions);
-            }}
-          >
-            {currentWorkspaceName ? currentWorkspaceName : ''}
-            <img src={dropDown}></img>
-          </div>
-          {isOwned && (
-            <img
-              src={cancel}
+      {displayChannels ? (
+        <nav className="main-nav">
+          <div className="split-current-div">
+            <div
+              className="current"
               onClick={(e) => {
-                handleDelete(e);
-              }}
-            ></img>
-          )}
-          {isOwned && (
-            <img
-              src={edit}
-              onClick={(e) => {
-                setEditForm(true);
-              }}
-            ></img>
-          )}
-        </div>
-        {showWorkspaceOptions && (
-          <div
-            className="workspace-options"
-            onMouseLeave={() => {
-              setShowWorkspaceOptions(false);
-            }}
-          >
-            <p
-              onClick={() => {
-                handleLeaveWorkspace();
+                e.preventDefault();
               }}
             >
-              Leave Workspace
-            </p>
+              <div
+                className="current-workspace"
+                onClick={(e) => {
+                  // e.preventDefault();
+                  setShowWorkspaceOptions(!showWorkspaceOptions);
+                }}
+              >
+                {currentWorkspaceName ? currentWorkspaceName : ''}
+                <img src={dropDown}></img>
+              </div>
+              {isOwned && (
+                <img
+                  src={cancel}
+                  onClick={(e) => {
+                    handleDelete(e);
+                  }}
+                ></img>
+              )}
+              {isOwned && (
+                <img
+                  src={edit}
+                  onClick={(e) => {
+                    setEditForm(true);
+                  }}
+                ></img>
+              )}
+            </div>
+            <div
+              className="minimize-channels"
+              onClick={() => {
+                setDisplayChannels(false);
+              }}
+            >
+              {'<'}
+            </div>
           </div>
-        )}
-        <div className="seperator"></div>
-        <Channels prevWorkspace={prevWorkspace} />
-      </nav>
+          {showWorkspaceOptions && (
+            <div
+              className="workspace-options"
+              onMouseLeave={() => {
+                setShowWorkspaceOptions(false);
+              }}
+            >
+              <p
+                onClick={() => {
+                  handleLeaveWorkspace();
+                }}
+              >
+                Leave Workspace
+              </p>
+            </div>
+          )}
+          <div className="seperator"></div>
+          <Channels prevWorkspace={prevWorkspace} />
+        </nav>
+      ) : (
+        <div
+          className="minimize-channels bigger"
+          onClick={() => {
+            setDisplayChannels(true);
+          }}
+        >
+          {'>'}
+        </div>
+      )}
+
       {showForm && (
         <CreateWorkspaceModal
           hideForm={() => setShowForm(false)}

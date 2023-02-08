@@ -144,6 +144,23 @@ main {
   margin-bottom: 3px;
 }
 
+.minimize-channels {
+  color: white;
+  font-size: 20px;
+}
+.minimize-channels:hover {
+  cursor: pointer;
+}
+.split-current-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bigger {
+  font-size: 30px;
+  padding-left: 5px;
+}
+
 /* ----------- FORM STYLING ---------- */
 .create-workspace-form-container {
   /* display: flex; */
